@@ -19,7 +19,7 @@
             background-size: cover;
             background-position: center;
             position: relative;
-            padding-bottom: 150px; /* Visina talasa */
+            padding-bottom: 150px; 
         }
         
         .service-card:hover {
@@ -27,6 +27,10 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         
+        .logo-container { /* Dodata klasa za lakše targetiranje loga */
+            cursor: pointer; /* Pokazuje da je klikabilno */
+            user-select: none; /* Sprečava selekciju teksta pri višestrukom kliku */
+        }
         .logo {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
@@ -46,26 +50,26 @@
             position: relative;
             display: block;
             width: calc(100% + 1.3px);
-            height: 150px; /* Visina talasa */
+            height: 150px; 
         }
         
         .wave-shape .shape-fill {
-            fill: #FFFFFF; /* Boja talasa - mora odgovarati pozadini sledeće sekcije */
+            fill: #FFFFFF; 
         }
 
         .price-list {
-            background-color: #f8fafc; /* Light gray background for price list */
+            background-color: #f8fafc; 
             border-radius: 0.5rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
         .price-item {
-            border-bottom: 1px solid #e2e8f0; /* Light gray border */
+            border-bottom: 1px solid #e2e8f0; 
             transition: all 0.3s ease;
         }
 
         .price-item:hover {
-            background-color: #ffffff; /* White background on hover */
+            background-color: #ffffff; 
         }
 
         .price-item:last-child {
@@ -73,7 +77,7 @@
         }
 
         .price-tag {
-            background-color: #3b82f6; /* Blue-600 */
+            background-color: #3b82f6; 
             color: white;
             border-radius: 9999px;
             padding: 0.25rem 0.75rem;
@@ -82,58 +86,58 @@
         
         .cta-button {
             position: relative;
-            z-index: 50; /* Povećan z-index za CTA dugme */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3); /* Pojačana senka */
+            z-index: 50; 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3); 
             transition: all 0.3s ease;
-            transform: translateY(0); /* Osnovna pozicija */
+            transform: translateY(0); 
         }
         
         .cta-button:hover {
-            transform: translateY(-3px); /* Blagi "lift" efekat */
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3); /* Jača senka na hover */
+            transform: translateY(-3px); 
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3); 
         }
         
         .hero-content {
             position: relative;
-            z-index: 20; /* Osigurava da je sadržaj iznad talasa pre nego što se talas rotira */
+            z-index: 20; 
         }
 
         /* Gallery Section */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Adjust number of columns as needed */
-            gap: 1rem; /* Space between items */
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 1rem; 
         }
         
         .gallery-item {
             position: relative;
             overflow: hidden;
-            border-radius: 0.5rem; /* Rounded corners */
+            border-radius: 0.5rem; 
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            aspect-ratio: 4/3; /* Maintain aspect ratio */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Subtle shadow */
+            aspect-ratio: 4/3; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
         }
         
         .gallery-item:hover {
-            transform: scale(1.03) translateY(-5px); /* Slightly larger and lifted on hover */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Enhanced shadow on hover */
+            transform: scale(1.03) translateY(-5px); 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
         }
         
         .gallery-img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ensures image covers the area, might crop */
+            object-fit: cover; 
             transition: transform 0.5s ease;
         }
         
         .gallery-item:hover .gallery-img {
-            transform: scale(1.1); /* Zoom image slightly on hover */
+            transform: scale(1.1); 
         }
         
         /* Image Modal */
         .image-modal {
-            display: none; /* Hidden by default */
+            display: none; 
             position: fixed;
             top: 0;
             left: 0;
@@ -152,8 +156,8 @@
         
         .modal-img {
             max-width: 100%;
-            max-height: 90vh; /* Max height relative to viewport height */
-            object-fit: contain; /* Ensures entire image is visible without cropping */
+            max-height: 90vh; 
+            object-fit: contain; 
         }
         
         .close-modal {
@@ -174,7 +178,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000; /* Visok z-index za modal */
+            z-index: 1000; 
             justify-content: center;
             align-items: center;
         }
@@ -184,25 +188,25 @@
             padding: 2rem;
             border-radius: 0.5rem;
             width: 90%;
-            max-width: 400px; /* Maksimalna širina modala */
+            max-width: 400px; 
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         .admin-panel {
-            display: none; /* Skriven po defaultu */
+            display: none; 
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-color: white;
-            z-index: 1001; /* Iznad admin modala */
+            z-index: 1001; 
             overflow-y: auto;
             padding: 1rem;
         }
 
         .admin-nav {
-            background-color: #1e40af; /* Tamno plava */
+            background-color: #1e40af; 
             color: white;
             padding: 1rem;
             display: flex;
@@ -219,12 +223,12 @@
             display: block;
         }
 
-        .message-item, .gallery-item-admin { /* Promenjeno ime klase da se ne sudara sa frontend galerijom */
+        .message-item, .gallery-item-admin { 
             border-bottom: 1px solid #e2e8f0;
             padding: 1rem 0;
         }
 
-        .gallery-image-admin { /* Promenjeno ime klase */
+        .gallery-image-admin { 
             width: 100%;
             height: 200px;
             object-fit: cover;
@@ -241,7 +245,7 @@
                 width: 95%;
             }
             
-            .gallery-image-admin { /* Promenjeno ime klase */
+            .gallery-image-admin { 
                 height: 150px;
             }
         }
@@ -254,12 +258,13 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Admin Login Button -->
+    <!-- Admin Login Button - UKLONJENO
     <div class="fixed top-4 right-4 z-50">
         <button id="adminLoginBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300">
             <i class="fas fa-sign-in-alt mr-2"></i>Login
         </button>
     </div>
+    -->
 
 <!-- Admin Login Modal -->
 <div class="admin-modal" id="adminModal">
@@ -310,14 +315,14 @@
         <h3 class="text-xl font-bold text-gray-800 mb-4">Manažment galérie</h3>
         
         <div class="mb-6">
-            <h4 class="font-bold text-gray-700 mb-2">Pridať nový obrázok</h4>
+            <h4 class="font-bold text-gray-700 mb-2">Pridať nový obrázok / obrázky</h4>
             <form id="uploadForm" class="flex flex-col md:flex-row gap-4">
-                <input type="file" id="imageUpload" accept="image/*" class="px-4 py-2 border border-gray-300 rounded-lg" required>
+                <input type="file" id="imageUpload" accept="image/*" class="px-4 py-2 border border-gray-300 rounded-lg" multiple required> <!-- DODAT "multiple" atribut -->
                 <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Nahrať</button>
             </form>
         </div>
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="adminGalleryGrid"> <!-- Promenjeno ID da se ne sudara -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="adminGalleryGrid"> 
             <!-- Gallery images will be loaded here -->
         </div>
     </div>
@@ -354,7 +359,7 @@
 <!-- Original Website Content -->
 <header class="bg-white shadow-md sticky top-0 z-40">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-        <div class="flex items-center">
+        <div class="flex items-center logo-container" id="logoContainer"> <!-- Dodat ID i klasu logo kontejneru -->
             <div class="logo text-3xl font-bold text-blue-600 mr-2">
                 <span class="text-gray-800">Servis</span>Nemo
             </div>
@@ -391,7 +396,7 @@
             Kontaktujte nás
         </a>
     </div>
-    <div class="wave-shape"> <!-- Talas ostaje na dnu hero sekcije -->
+    <div class="wave-shape"> 
         <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
             <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
         </svg>
@@ -399,7 +404,7 @@
 </section>
 
 <!-- Gallery Section - Sada dolazi posle Hero sekcije -->
-<section id="gallery" class="py-16 bg-white"> <!-- Dodao sam ID "gallery" za lakše linkovanje ako treba -->
+<section id="gallery" class="py-16 bg-white"> 
     <div class="container mx-auto px-4">
         <div class="text-center mb-12">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Naša galéria</h2>
@@ -414,7 +419,7 @@
 </section>
 
 <!-- Services Section -->
-<section id="services" class="py-16 bg-gray-100"> <!-- Promenjena pozadina radi vizuelnog odvajanja -->
+<section id="services" class="py-16 bg-gray-100"> 
     <div class="container mx-auto px-4">
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Naše služby</h2>
@@ -499,7 +504,7 @@
 </section>
 
 <!-- Pricing Section -->
-<section id="pricing" class="py-16 bg-white"> <!-- Promenjena pozadina nazad na belu -->
+<section id="pricing" class="py-16 bg-white"> 
     <div class="container mx-auto px-4">
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Naše ceny</h2>
@@ -583,7 +588,7 @@
 </section>
 
 <!-- About Section -->
-<section id="about" class="py-16 bg-gray-100"> <!-- Promenjena pozadina radi vizuelnog odvajanja -->
+<section id="about" class="py-16 bg-gray-100"> 
     <div class="container mx-auto px-4">
         <div class="flex flex-col md:flex-row items-center">
             <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
@@ -630,7 +635,7 @@
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="py-16 bg-white"> <!-- Promenjena pozadina nazad na belu -->
+<section id="contact" class="py-16 bg-white"> 
     <div class="container mx-auto px-4">
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Kontaktujte nás</h2>
@@ -813,7 +818,6 @@
                     name: "Gate Service 3",
                     data: "https://i.ibb.co/N2jJk29k/da346e5f-24d8-4fe0-8820-1ddc528ccd80.jpg"
                 }
-                // Možeš dodati više podrazumevanih slika ako želiš
             ];
             localStorage.setItem('gallery', JSON.stringify(defaultImages));
         }
@@ -822,7 +826,8 @@
     // Render gallery grid
     function renderGallery() {
         const galleryContainer = document.getElementById('galleryContainer');
-        galleryContainer.innerHTML = ''; // Clear existing items
+        if (!galleryContainer) return; // Provera da li element postoji
+        galleryContainer.innerHTML = ''; 
         
         const gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
         
@@ -833,12 +838,11 @@
         
         gallery.forEach((img, index) => {
             const galleryItem = document.createElement('div');
-            galleryItem.className = 'gallery-item'; // Koristi stilove koje smo definisali
+            galleryItem.className = 'gallery-item'; 
             galleryItem.innerHTML = `
                 <img src="${img.data}" alt="${img.name}" class="gallery-img">
             `;
             
-            // Add click event to enlarge image
             galleryItem.addEventListener('click', () => {
                 openImageModal(img.data);
             });
@@ -853,27 +857,25 @@
     const closeModalBtn = document.querySelector('.close-modal');
     
     function openImageModal(imageSrc) {
-        modalImage.src = imageSrc;
-        imageModal.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+        if (modalImage) modalImage.src = imageSrc;
+        if (imageModal) imageModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; 
     }
     
     function closeImageModal() {
-        imageModal.style.display = 'none';
-        document.body.style.overflow = ''; // Re-enable scrolling
+        if (imageModal) imageModal.style.display = 'none';
+        document.body.style.overflow = ''; 
     }
     
-    // Close modal when clicking X or outside the image
-    closeModalBtn.addEventListener('click', closeImageModal);
-    imageModal.addEventListener('click', (e) => {
-        if (e.target === imageModal) { // Samo ako se klikne na pozadinu modala
+    if(closeModalBtn) closeModalBtn.addEventListener('click', closeImageModal);
+    if(imageModal) imageModal.addEventListener('click', (e) => {
+        if (e.target === imageModal) { 
             closeImageModal();
         }
     });
     
-    // Close modal with ESC key
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && imageModal.style.display === 'flex') {
+        if (e.key === 'Escape' && imageModal && imageModal.style.display === 'flex') {
             closeImageModal();
         }
     });
@@ -882,8 +884,8 @@
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     
-    menuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
+    if(menuBtn) menuBtn.addEventListener('click', () => {
+        if(mobileMenu) mobileMenu.classList.toggle('hidden');
     });
     
     // Smooth scrolling for anchor links
@@ -895,8 +897,8 @@
             const targetElement = document.querySelector(targetId);
             
             if (targetElement) {
-                // Izračunaj poziciju headera da bi skrolovanje bilo tačno
-                const headerOffset = document.querySelector('header').offsetHeight || 80; // Ako header ne postoji, koristi default offset
+                const headerEl = document.querySelector('header');
+                const headerOffset = headerEl ? headerEl.offsetHeight : 80; 
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
             
@@ -905,8 +907,7 @@
                     behavior: 'smooth'
                 });
                 
-                // Close mobile menu if open
-                if (!mobileMenu.classList.contains('hidden')) {
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                     mobileMenu.classList.add('hidden');
                 }
             }
@@ -919,7 +920,6 @@
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Get form data
             const formData = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
@@ -929,15 +929,12 @@
                 date: new Date().toISOString()
             };
             
-            // Save to localStorage (Admin panel će ovo čitati)
-            saveMessageToLocalStorage(formData); // Preimenovano da se ne sudara
+            saveMessageToLocalStorage(formData); 
             
-            // Send email notification if email is set (simulacija)
             const notificationEmail = localStorage.getItem('notificationEmail');
             if (notificationEmail) {
                 console.log('Simulacija slanja emaila na:', notificationEmail);
                 console.log('Sadržaj poruke:', formData);
-                // Ovde bi išao stvarni kod za slanje na backend ili korišćenje EmailJS/Formspree
             }
             
             alert('Ďakujeme za vašu správu! Čoskoro vás budeme kontaktovať.');
@@ -945,8 +942,7 @@
         });
     }
 
-    // Funkcija za čuvanje poruke u localStorage
-    function saveMessageToLocalStorage(message) { // Preimenovano
+    function saveMessageToLocalStorage(message) { 
         let messages = JSON.parse(localStorage.getItem('messages') || '[]');
         messages.push(message);
         localStorage.setItem('messages', JSON.stringify(messages));
@@ -954,10 +950,11 @@
 
 
     // Admin Panel Functionality
-    const adminLoginBtn = document.getElementById('adminLoginBtn');
+    // const adminLoginBtn = document.getElementById('adminLoginBtn'); // Uklonjeno jer se sada koristi logo
+    const logoContainer = document.getElementById('logoContainer'); // Novi selektor za logo
     const adminModal = document.getElementById('adminModal');
     const adminPanel = document.getElementById('adminPanel');
-    const closeModalButton = document.getElementById('closeModal'); // Ispravljen ID selektor
+    const closeModalButton = document.getElementById('closeModal'); 
     const loginForm = document.getElementById('loginForm');
     const logoutBtn = document.getElementById('logoutBtn');
     const adminTabs = document.querySelectorAll('.admin-tab');
@@ -965,41 +962,53 @@
     const uploadForm = document.getElementById('uploadForm');
     const settingsForm = document.getElementById('settingsForm');
 
-    // Show login modal when login button is clicked
-    if(adminLoginBtn) adminLoginBtn.addEventListener('click', () => {
-        adminModal.style.display = 'flex';
+    let logoClickCount = 0;
+    let logoClickTimer = null;
+
+    // Novi event listener za logo
+    if(logoContainer) {
+        logoContainer.addEventListener('click', () => {
+            logoClickCount++;
+            if (logoClickTimer) {
+                clearTimeout(logoClickTimer);
+            }
+            logoClickTimer = setTimeout(() => {
+                logoClickCount = 0; // Resetuj brojač ako prođe previše vremena između klikova
+            }, 1500); // Resetuj nakon 1.5 sekunde neaktivnosti
+
+            if (logoClickCount === 5) {
+                if(adminModal) adminModal.style.display = 'flex';
+                logoClickCount = 0; // Resetuj brojač
+                clearTimeout(logoClickTimer); // Obriši tajmer
+            }
+        });
+    }
+
+    if(closeModalButton) closeModalButton.addEventListener('click', () => { 
+        if(adminModal) adminModal.style.display = 'none';
     });
 
-    // Close modal
-    if(closeModalButton) closeModalButton.addEventListener('click', () => { // Ispravljen ID selektor
-        adminModal.style.display = 'none';
-    });
-
-    // Login form submission
     if(loginForm) loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
         
-        // Check credentials
         if (username === 'nemanja.slovakia' && password === 'baric2025') {
-            adminModal.style.display = 'none';
-            adminPanel.style.display = 'block';
-            loadAdminMessages(); // Preimenovano
-            loadAdminGallery(); // Preimenovano
-            loadAdminSettings(); // Preimenovano
+            if(adminModal) adminModal.style.display = 'none';
+            if(adminPanel) adminPanel.style.display = 'block';
+            loadAdminMessages(); 
+            loadAdminGallery(); 
+            loadAdminSettings(); 
         } else {
             alert('Nesprávne prihlasovacie údaje!');
         }
     });
 
-    // Logout button
     if(logoutBtn) logoutBtn.addEventListener('click', () => {
-        adminPanel.style.display = 'none';
+        if(adminPanel) adminPanel.style.display = 'none';
     });
 
-    // Tab switching
     if(adminTabs) adminTabs.forEach(tab => {
         tab.addEventListener('click', () => {
             adminTabs.forEach(t => t.classList.remove('active', 'text-blue-600', 'border-blue-600'));
@@ -1009,13 +1018,14 @@
             tab.classList.add('active', 'text-blue-600', 'border-blue-600');
             tab.classList.remove('text-gray-600', 'hover:text-blue-600');
             const tabId = tab.getAttribute('data-tab');
-            document.getElementById(`${tabId}Section`).classList.add('active');
+            const section = document.getElementById(`${tabId}Section`);
+            if(section) section.classList.add('active');
         });
     });
 
-    // Load messages for Admin Panel
-    function loadAdminMessages() { // Preimenovano
+    function loadAdminMessages() { 
         const messagesList = document.getElementById('messagesList');
+        if(!messagesList) return;
         messagesList.innerHTML = '';
         
         const messages = JSON.parse(localStorage.getItem('messages') || '[]');
@@ -1027,7 +1037,7 @@
         
         messages.reverse().forEach(msg => {
             const messageItem = document.createElement('div');
-            messageItem.className = 'message-item'; // Koristi postojeću klasu ako odgovara
+            messageItem.className = 'message-item'; 
             messageItem.innerHTML = `
                 <div class="bg-white p-4 rounded-lg shadow mb-4">
                     <div class="flex justify-between items-start mb-2">
@@ -1044,9 +1054,9 @@
         });
     }
 
-    // Gallery management for Admin Panel
-    function loadAdminGallery() { // Preimenovano
-        const adminGalleryGrid = document.getElementById('adminGalleryGrid'); // Koristi novi ID
+    function loadAdminGallery() { 
+        const adminGalleryGrid = document.getElementById('adminGalleryGrid'); 
+        if(!adminGalleryGrid) return;
         adminGalleryGrid.innerHTML = '';
         
         const gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
@@ -1057,11 +1067,11 @@
         }
         
         gallery.forEach((img, index) => {
-            const galleryItemAdmin = document.createElement('div'); // Koristi novu promenljivu
-            galleryItemAdmin.className = 'gallery-item-admin'; // Koristi novu klasu ako treba
+            const galleryItemAdmin = document.createElement('div'); 
+            galleryItemAdmin.className = 'gallery-item-admin'; 
             galleryItemAdmin.innerHTML = `
                 <div class="bg-white p-4 rounded-lg shadow">
-                    <img src="${img.data}" alt="${img.name}" class="gallery-image-admin mb-2"> <!-- Koristi novu klasu ako treba -->
+                    <img src="${img.data}" alt="${img.name}" class="gallery-image-admin mb-2"> 
                     <div class="flex justify-between">
                         <button class="delete-image bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded text-sm" data-index="${index}">
                             <i class="fas fa-trash"></i> Vymazať
@@ -1075,71 +1085,75 @@
         document.querySelectorAll('.delete-image').forEach(btn => {
             btn.addEventListener('click', function() {
                 const index = this.getAttribute('data-index');
-                deleteAdminImage(index); // Preimenovano
+                deleteAdminImage(index); 
             });
         });
     }
 
-    // Upload image (Admin Panel)
     if(uploadForm) uploadForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
         const fileInput = document.getElementById('imageUpload');
-        const file = fileInput.files[0];
+        const files = fileInput.files; // Sada uzimamo SVE selektovane fajlove
         
-        if (!file) {
-            alert('Prosím vyberte obrázok.');
+        if (!files || files.length === 0) {
+            alert('Prosím vyberte obrázok alebo obrázky.');
             return;
         }
         
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const imageData = e.target.result;
-            
-            let gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
-            gallery.push({
-                name: file.name,
-                type: file.type,
-                size: file.size,
-                data: imageData
-            });
-            
-            localStorage.setItem('gallery', JSON.stringify(gallery));
-            loadAdminGallery(); // Osveži admin galeriju
-            renderGallery(); // Osveži frontend galeriju
-            fileInput.value = ''; // Resetuj input polje
-        };
-        reader.readAsDataURL(file);
+        let gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
+
+        Array.from(files).forEach(file => { // Iteriramo kroz svaki fajl
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const imageData = event.target.result;
+                gallery.push({
+                    name: file.name,
+                    type: file.type,
+                    size: file.size,
+                    data: imageData
+                });
+                
+                // Sačuvaj i osveži nakon što je poslednji fajl pročitan
+                if (gallery.length === (JSON.parse(localStorage.getItem('gallery') || '[]').length + files.length)) {
+                    localStorage.setItem('gallery', JSON.stringify(gallery));
+                    loadAdminGallery(); 
+                    renderGallery(); 
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+        fileInput.value = ''; // Resetuj input polje
     });
 
-    // Delete image (Admin Panel)
-    function deleteAdminImage(index) { // Preimenovano
+    function deleteAdminImage(index) { 
         if (confirm('Naozaj chcete vymazať tento obrázok?')) {
             let gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
             gallery.splice(index, 1);
             localStorage.setItem('gallery', JSON.stringify(gallery));
-            loadAdminGallery(); // Osveži admin galeriju
-            renderGallery(); // Osveži frontend galeriju
+            loadAdminGallery(); 
+            renderGallery(); 
         }
     }
 
-    // Load settings (Admin Panel)
-    function loadAdminSettings() { // Preimenovano
-        const notificationEmail = localStorage.getItem('notificationEmail');
-        if (notificationEmail) {
-            document.getElementById('notificationEmail').value = notificationEmail;
+    function loadAdminSettings() { 
+        const notificationEmailEl = document.getElementById('notificationEmail');
+        if(notificationEmailEl) {
+            const notificationEmail = localStorage.getItem('notificationEmail');
+            if (notificationEmail) {
+                notificationEmailEl.value = notificationEmail;
+            }
         }
     }
 
-    // Save settings (Admin Panel)
     if(settingsForm) settingsForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
         const notificationEmail = document.getElementById('notificationEmail').value;
         const newPasswordInput = document.getElementById('adminPassword');
         const confirmPasswordInput = document.getElementById('adminPasswordConfirm');
-        const newPassword = newPasswordInput.value;
-        const confirmPassword = confirmPasswordInput.value;
+        const newPassword = newPasswordInput ? newPasswordInput.value : '';
+        const confirmPassword = confirmPasswordInput ? confirmPasswordInput.value : '';
         
         if (notificationEmail) {
             localStorage.setItem('notificationEmail', notificationEmail);
@@ -1147,10 +1161,9 @@
         
         if (newPassword && newPassword === confirmPassword) {
             alert('Heslo bolo zmenené. V reálnej aplikácii by toto heslo bolo zašifrované a uložené bezpečne.');
-            // Ovde bi trebalo implementirati logiku za promenu šifre, npr. čuvanje hasha
         } else if (newPassword && newPassword !== confirmPassword) {
             alert('Heslá sa nezhodujú!');
-            return; // Ne nastavljaj ako se šifre ne poklapaju
+            return; 
         } else if (!newPassword && confirmPassword) {
             alert('Prosím zadajte aj nové heslo ak želite da ga promenit.');
             return;
@@ -1164,11 +1177,9 @@
         if(confirmPasswordInput) confirmPasswordInput.value = '';
     });
 
-    // Initialize the page
     document.addEventListener('DOMContentLoaded', () => {
         initializeGallery();
         renderGallery();
-        // Ostale inicijalizacije ako su potrebne
     });
 </script>
 </body>
