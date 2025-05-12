@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servis Nemo - Špecializovaný servis brán a vrat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            padding-bottom: 150px;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .wave-shape {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+        
+        .wave-shape svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 150px;
+        }
+        
+        .wave-shape .shape-fill {
+            fill: #FFFFFF;
+        }
+
+        .price-list {
+            background-color: #f8fafc;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .price-item {
+            border-bottom: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .price-item:hover {
+            background-color: #ffffff;
+        }
+
+        .price-item:last-child {
+            border-bottom: none;
+        }
+
+        .price-tag {
+            background-color: #3b82f6;
+            color: white;
+            border-radius: 9999px;
+            padding: 0.25rem 0.75rem;
+            font-weight: 600;
+        }
+        
+        .cta-button {
+            position: relative;
+            z-index: 50;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 20;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            aspect-ratio: 4/3;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+        
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .modal-img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        /* Admin Panel Styles */
+        .admin-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .admin-modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 1001;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .admin-nav {
+            background-color: #1e40af;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .admin-section {
+            display: none;
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        .message-item, .gallery-item {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 0;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 0.25rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .admin-modal-content {
+                width: 95%;
+            }
+            
+            .gallery-image {
+                height: 150px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Admin Login Button -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="adminLoginBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300">
+            <i class="fas fa-sign-in-alt mr-2"></i>Login
+        </button>
+    </div>
+
+<!-- Admin Login Modal -->
+<div class="admin-modal" id="adminModal">
+    <div class="admin-modal-content">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Admin Prihlásenie</h2>
+        <form id="loginForm">
+            <div class="mb-4">
+                <label for="username" class="block text-gray-700 font-medium mb-2">Používateľské meno</label>
+                <input type="text" id="username" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+            </div>
+            <div class="mb-6">
+                <label for="password" class="block text-gray-700 font-medium mb-2">Heslo</label>
+                <input type="password" id="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+            </div>
+            <div class="flex justify-between items-center">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300">Prihlásiť sa</button>
+                <button type="button" id="closeModal" class="text-gray-600 hover:text-gray-800">Zavrieť</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Admin Panel -->
+<div class="admin-panel" id="adminPanel">
+    <div class="admin-nav">
+        <h2 class="text-xl font-bold">Servis Nemo Admin</h2>
+        <button id="logoutBtn" class="text-white hover:text-gray-200">
+            <i class="fas fa-sign-out-alt"></i> Odhlásiť sa
+        </button>
+    </div>
+
+    <div class="admin-tabs mb-4 flex border-b border-gray-200">
+        <button class="admin-tab active px-4 py-2 font-medium text-blue-600 border-b-2 border-blue-600" data-tab="messages">Správy</button>
+        <button class="admin-tab px-4 py-2 font-medium text-gray-600 hover:text-blue-600" data-tab="gallery">Galéria</button>
+        <button class="admin-tab px-4 py-2 font-medium text-gray-600 hover:text-blue-600" data-tab="settings">Nastavenia</button>
+    </div>
+
+    <!-- Messages Section -->
+    <div class="admin-section active" id="messagesSection">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Správy od zákazníkov</h3>
+        <div id="messagesList">
+            <!-- Messages will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="admin-section" id="gallerySection">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Manažment galérie</h3>
+        
+        <div class="mb-6">
+            <h4 class="font-bold text-gray-700 mb-2">Pridať nový obrázok</h4>
+            <form id="uploadForm" class="flex flex-col md:flex-row gap-4">
+                <input type="file" id="imageUpload" accept="image/*" class="px-4 py-2 border border-gray-300 rounded-lg" required>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Nahrať</button>
+            </form>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="galleryGrid">
+            <!-- Gallery images will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Settings Section -->
+    <div class="admin-section" id="settingsSection">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Nastavenia</h3>
+        
+        <form id="settingsForm">
+            <div class="mb-4">
+                <label for="notificationEmail" class="block text-gray-700 font-medium mb-2">Email pre notifikácie</label>
+                <input type="email" id="notificationEmail" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+            </div>
+            
+            <div class="mb-4">
+                <label for="adminPassword" class="block text-gray-700 font-medium mb-2">Zmeniť heslo</label>
+                <input type="password" id="adminPassword" placeholder="Nové heslo" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent mb-2">
+                <input type="password" id="adminPasswordConfirm" placeholder="Potvrďte nové heslo" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+            </div>
+            
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300">Uložiť zmeny</button>
+        </form>
+    </div>
+</div>
+
+<!-- Image Modal -->
+<div class="image-modal" id="imageModal">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+        <img class="modal-img" id="modalImage" src="" alt="Enlarged image">
+    </div>
+</div>
+
+<!-- Original Website Content -->
+<header class="bg-white shadow-md sticky top-0 z-40">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center">
+            <div class="logo text-3xl font-bold text-blue-600 mr-2">
+                <span class="text-gray-800">Servis</span>Nemo
+            </div>
+        </div>
+        <nav class="hidden md:flex space-x-8">
+            <a href="#home" class="text-gray-800 hover:text-blue-600 font-medium">Domov</a>
+            <a href="#services" class="text-gray-800 hover:text-blue-600 font-medium">Služby</a>
+            <a href="#pricing" class="text-gray-800 hover:text-blue-600 font-medium">Cenník</a>
+            <a href="#about" class="text-gray-800 hover:text-blue-600 font-medium">O nás</a>
+            <a href="#contact" class="text-gray-800 hover:text-blue-600 font-medium">Kontakt</a>
+        </nav>
+        <div class="md:hidden">
+            <button id="menu-btn" class="text-gray-800 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-4 shadow-lg">
+        <a href="#home" class="block py-2 text-gray-800 hover:text-blue-600">Domov</a>
+        <a href="#services" class="block py-2 text-gray-800 hover:text-blue-600">Služby</a>
+        <a href="#pricing" class="block py-2 text-gray-800 hover:text-blue-600">Cenník</a>
+        <a href="#about" class="block py-2 text-gray-800 hover:text-blue-600">O nás</a>
+        <a href="#contact" class="block py-2 text-gray-800 hover:text-blue-600">Kontakt</a>
+    </div>
+</header>
+
+<!-- Gallery Section -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Naša galéria</h2>
+            <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Pozrite si naše realizácie a práce, ktoré sme vykonali pre našich klientov.</p>
+        </div>
+        
+        <div class="gallery-grid" id="galleryContainer">
+            <!-- Images will be loaded here by JavaScript -->
+        </div>
+    </div>
+</section>
+
+<!-- Hero Section -->
+<section id="home" class="hero text-white">
+    <div class="container mx-auto px-4 py-32 text-center hero-content">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">Špecializovaný servis brán a vrat</h1>
+        <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Profesionálna montáž, opravy a údržba všetkých typov brán a vrat na celom Slovensku.</p>
+        <a href="#contact" class="cta-button inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-full text-lg transition duration-300">
+            Kontaktujte nás
+        </a>
+    </div>
+    <div class="wave-shape">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+        </svg>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Naše služby</h2>
+            <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Špecializujeme sa výhradne na servis a inštaláciu brán a vrat. Ponúkame komplexné riešenia pre všetky vaše potreby.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Service 1 -->
+            <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300">
+                <div class="h-48 bg-gray-200 flex items-center justify-center">
+                    <i class="fas fa-tools text-6xl text-blue-600"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Opravy brán</h3>
+                    <p class="text-gray-600 mb-4">Komplexné opravy všetkých typov brán vrátane mechanických a elektronických závad.</p>
+                    <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
+                </div>
+            </div>
+            
+            <!-- Service 2 -->
+            <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300">
+                <div class="h-48 bg-gray-200 flex items-center justify-center">
+                    <i class="fas fa-door-open text-6xl text-blue-600"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Montáž nových brán</h3>
+                    <p class="text-gray-600 mb-4">Profesionálna inštalácia nových posuvných, krídlových a garážových vrat.</p>
+                    <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
+                </div>
+            </div>
+            
+            <!-- Service 3 -->
+            <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300">
+                <div class="h-48 bg-gray-200 flex items-center justify-center">
+                    <i class="fas fa-cogs text-6xl text-blue-600"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Údržba pohonov</h3>
+                    <p class="text-gray-600 mb-4">Servis a výmena automatických pohonov pre všetky typy brán a vrat.</p>
+                    <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
+                </div>
+            </div>
+            
+            <!-- Service 4 -->
+            <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300">
+                <div class="h-48 bg-gray-200 flex items-center justify-center">
+                    <i class="fas fa-key text-6xl text-blue-600"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Programovanie ovládačov</h3>
+                    <p class="text-gray-600 mb-4">Výroba a programovanie ovládačov pre automatické brány a vráta.</p>
+                    <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
+                </div>
+            </div>
+            
+            <!-- Service 5 -->
+            <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300">
+                <div class="h-48 bg-gray-200 flex items-center justify-center">
+                    <i class="fas fa-shield-alt text-6xl text-blue-600"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Bezpečnostné systémy</h3>
+                    <p class="text-gray-600 mb-4">Inštalácia fotobuniek a iných bezpečnostných prvkov pre brány.</p>
+                    <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
+                </div>
+            </div>
+            
+            <!-- Service 6 -->
+            <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300">
+                <div class="h-48 bg-gray-200 flex items-center justify-center">
+                    <i class="fas fa-mobile-alt text-6xl text-blue-600"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Smart ovládanie</h3>
+                    <p class="text-gray-600 mb-4">Moderné riešenia pre ovládanie brán cez mobilné zariadenia.</p>
+                    <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Section -->
+<section id="pricing" class="py-16 bg-gray-100">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Naše ceny</h2>
+            <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Ponúkame transparentné a konkurencieschopné ceny za naše služby. Všetky ceny sú uvedené bez DPH.</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto price-list overflow-hidden">
+            <!-- Price Item 1 -->
+            <div class="price-item p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
+                <div class="mb-4 md:mb-0 md:mr-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Príchod technika na miesto</h3>
+            <p class="text-gray-600">Náš kvalifikovaný technik príde na miesto, vykoná odbornú diagnostiku a ak je to možné, problém vyrieši priamo na mieste. Ak bude potrebné objednať náhradné diely, dohodneme termín dokončenia opravy.</p>
+                </div>
+                <div class="flex-shrink-0">
+                    <span class="price-tag">Od 50€ (Bratislava)</span>
+                </div>
+            </div>
+
+            <!-- Price Item 2 -->
+            <div class="price-item p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
+                <div class="mb-4 md:mb-0 md:mr-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Opravy a modernizácia brán</h3>
+                    <p class="text-gray-600">Špecializujeme sa na rôzne typy opráv a modernizácií: výmena bezpečnostných komponentov (senzory, fotobuňky), inštalácia protipádových systémov, odstraňovanie závad brán a automatických systémov.</p>
+                </div>
+                <div class="flex-shrink-0">
+                    <span class="price-tag">Individuálna cenová ponuka</span>
+                </div>
+            </div>
+
+            <!-- Price Item 3 -->
+            <div class="price-item p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
+                <div class="mb-4 md:mb-0 md:mr-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Nastavenie a programovanie ovládačov</h3>
+                    <p class="text-gray-600">Potrebujete nový ovládač alebo preprogramovať existujúci? Naši technici vám vytvoria plne funkčný ovládač presne podľa vašich požiadaviek a nastavení.</p>
+                </div>
+                <div class="flex-shrink-0">
+                    <span class="price-tag">Od 20€ za kus</span>
+                </div>
+            </div>
+
+            <!-- Price Item 4 -->
+            <div class="price-item p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
+                <div class="mb-4 md:mb-0 md:mr-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Výmena pružinového systému</h3>
+                    <p class="text-gray-600">Zabezpečujeme odbornú výmenu pružín vrátane ich presného napnutia a následného kalibrácie celého systému pre bezchybnú prevádzku vašej brány.</p>
+                </div>
+                <div class="flex-shrink-0">
+                    <span class="price-tag">Od 200€</span>
+                </div>
+            </div>
+
+            <!-- Price Item 5 -->
+            <div class="price-item p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
+                <div class="mb-4 md:mb-0 md:mr-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Inštalácia nového pohonu</h3>
+                    <p class="text-gray-600">Ak váš aktuálny pohon dosluhuje, našimi odborníkmi nainštalujeme nový, správne ho zapojíme a nakalibrujeme pre optimálnu a spoľahlivú prevádzku.</p>
+                </div>
+                <div class="flex-shrink-0">
+                    <span class="price-tag">Od 150€</span>
+                </div>
+            </div>
+
+            <!-- Price Item 6 -->
+            <div class="price-item p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
+                <div class="mb-4 md:mb-0 md:mr-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Pravidelná údržba brán</h3>
+                    <p class="text-gray-600">Pravidelný servis predlžuje životnosť vášho zariadenia. Naši technici vykonajú komplexnú kontrolu mechanických aj elektronických komponentov a prispôsobia nastavenia pre optimálnu funkčnosť.</p>
+                </div>
+                <div class="flex-shrink-0">
+                    <span class="price-tag">Individuálna cenová ponuka</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 text-center">
+            <p class="text-gray-600 mb-6">Všetky uvedené ceny sú orientačné. Presná cena sa určuje na základe rozsahu práce a použitých materiálov.</p>
+            <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 inline-block">Požiadať o cenovú ponuku</a>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Servis Nemo team" class="rounded-lg shadow-lg w-full">
+            </div>
+            <div class="md:w-1/2">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">O našej firme</h2>
+                <p class="text-gray-600 mb-4">Servis Nemo je popredná slovenská firma špecializujúca sa na servis a inštaláciu brán a vrat. Sme na trhu od roku 2010 a za túto dobu sme získali tisíce spokojných zákazníkov po celom Slovensku.</p>
+                <p class="text-gray-600 mb-4">Našim cieľom je poskytovať kvalitné a spoľahlivé služby za rozumnú cenu. Všetci naši zamestnanci sú kvalifikovaní odborníci s dlhoročnými skúsenosťami v oblasti automatických brán a vrat.</p>
+                <p class="text-gray-600 mb-6">Ponúkame komplexné riešenia pre všetky vaše potreby súvisiace s bránami a vratami - od montáže nových zariadení až po pravidelnú údržbu a opravy.</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <div class="text-blue-600 text-3xl mb-2">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800">Kvalita</h4>
+                        <p class="text-gray-600 text-sm">Zaručujeme vysokú kvalitu všetkých vykonaných prác</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <div class="text-blue-600 text-3xl mb-2">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800">Rýchlosť</h4>
+                        <p class="text-gray-600 text-sm">Rýchle a spoľahlivé vybavenie vašej požiadavky</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <div class="text-blue-600 text-3xl mb-2">
+                            <i class="fas fa-euro-sign"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800">Cena</h4>
+                        <p class="text-gray-600 text-sm">Transparentné a konkurencieschopné ceny</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <div class="text-blue-600 text-3xl mb-2">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800">Podpora</h4>
+                        <p class="text-gray-600 text-sm">Dostupná zákaznícka podpora 7 dní v týždni</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-16 bg-gray-100">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Kontaktujte nás</h2>
+            <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+        </div>
+        
+        <div class="flex flex-col md:flex-row">
+            <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">Kontaktné údaje</h3>
+                
+                <div class="mb-6">
+                    <div class="flex items-start mb-4">
+                        <div class="text-blue-600 mr-4 mt-1">
+                            <i class="fas fa-map-marker-alt text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Adresa</h4>
+                            <p class="text-gray-600">Servis Nemo s.r.o.<br>Hlavná 123<br>821 01 Bratislava</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start mb-4">
+                        <div class="text-blue-600 mr-4 mt-1">
+                            <i class="fas fa-phone-alt text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Telefón</h4>
+                            <p class="text-gray-600">+421 123 456 789</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start mb-4">
+                        <div class="text-blue-600 mr-4 mt-1">
+                            <i class="fas fa-envelope text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Email</h4>
+                            <p class="text-gray-600">info@servisnemo.sk</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="text-blue-600 mr-4 mt-1">
+                            <i class="fas fa-clock text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Otvorené</h4>
+                            <p class="text-gray-600">Pondelok - Piatok: 8:00 - 18:00<br>Sobota: 9:00 - 14:00<br>Nedeľa: Zatvorené</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Firemné údaje</h3>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <p class="text-gray-600 mb-2"><span class="font-bold">IČO:</span> 53891589</p>
+                    <p class="text-gray-600 mb-2"><span class="font-bold">DIČ:</span> 3120995383</p>
+                    <p class="text-gray-600"><span class="font-bold">IBAN:</span> SK42 1100 0000 0029 4122 9092</p>
+                </div>
+            </div>
+            
+            <div class="md:w-1/2">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">Napíšte nám</h3>
+                <form id="contactForm" class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-gray-700 font-medium mb-1">Meno a priezvisko</label>
+                        <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-gray-700 font-medium mb-1">Email</label>
+                        <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                    </div>
+                    
+                    <div>
+                        <label for="phone" class="block text-gray-700 font-medium mb-1">Telefón</label>
+        <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+    </div>
+    
+    <div>
+        <label for="service" class="block text-gray-700 font-medium mb-1">Služba</label>
+        <select id="service" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+            <option value="">Vyberte službu</option>
+            <option value="repairs">Opravy brán</option>
+            <option value="installation">Montáž nových brán</option>
+            <option value="maintenance">Údržba pohonov</option>
+            <option value="remotes">Programovanie ovládačov</option>
+            <option value="security">Bezpečnostné systémy</option>
+            <option value="smart">Smart ovládanie</option>
+            <option value="other">Iné</option>
+        </select>
+    </div>
+    
+    <div>
+        <label for="message" class="block text-gray-700 font-medium mb-1">Správa</label>
+        <textarea id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required></textarea>
+    </div>
+    
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 w-full">Odoslať správu</button>
+</form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between">
+            <div class="mb-6 md:mb-0">
+                <div class="logo text-3xl font-bold text-white mb-4">
+                    <span class="text-gray-300">Servis</span>Nemo
+                </div>
+                <p class="text-gray-400 mb-4">Špecializovaný servis brán a vrat na Slovensku.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Navigácia</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition duration-300">Domov</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Služby</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-white transition duration-300">Cenník</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition duration-300">O nás</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition duration-300">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Služby</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Opravy brán</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Montáž brán</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Údržba pohonov</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Programovanie</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Právne informácie</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Obchodné podmienky</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Ochrana osobných údajov</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p>© 2023 Servis Nemo s.r.o. Všetky práva vyhradené.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Initialize gallery with default images if none exist in localStorage
+    function initializeGallery() {
+        if (!localStorage.getItem('gallery')) {
+            const defaultImages = [
+                {
+                    name: "Gate Service 1",
+                    data: "https://i.ibb.co/zHQ1Lnnw/a18ff8db-4333-478d-a43c-f5dc8fd7abfa.jpg"
+                },
+                {
+                    name: "Gate Service 2",
+                    data: "https://i.ibb.co/Xf4HrhkT/53c70a78-ac51-4bfa-a596-d5c26525157e.jpg"
+                },
+                {
+                    name: "Gate Service 3",
+                    data: "https://i.ibb.co/N2jJk29k/da346e5f-24d8-4fe0-8820-1ddc528ccd80.jpg"
+                }
+            ];
+            localStorage.setItem('gallery', JSON.stringify(defaultImages));
+        }
+    }
+
+    // Render gallery grid
+    function renderGallery() {
+        const galleryContainer = document.getElementById('galleryContainer');
+        galleryContainer.innerHTML = '';
+        
+        const gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
+        
+        if (gallery.length === 0) {
+            galleryContainer.innerHTML = '<p class="text-gray-600 text-center col-span-3">Žiadne obrázky v galérii</p>';
+            return;
+        }
+        
+        gallery.forEach((img, index) => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            galleryItem.innerHTML = `
+                <img src="${img.data}" alt="${img.name}" class="gallery-img">
+            `;
+            
+            // Add click event to enlarge image
+            galleryItem.addEventListener('click', () => {
+                openImageModal(img.data);
+            });
+            
+            galleryContainer.appendChild(galleryItem);
+        });
+    }
+    
+    // Image modal functionality
+    const imageModal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeModalBtn = document.querySelector('.close-modal');
+    
+    function openImageModal(imageSrc) {
+        modalImage.src = imageSrc;
+        imageModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+    }
+    
+    function closeImageModal() {
+        imageModal.style.display = 'none';
+        document.body.style.overflow = ''; // Re-enable scrolling
+    }
+    
+    // Close modal when clicking X or outside the image
+    closeModalBtn.addEventListener('click', closeImageModal);
+    imageModal.addEventListener('click', (e) => {
+        if (e.target === imageModal) {
+            closeImageModal();
+        }
+    });
+    
+    // Close modal with ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && imageModal.style.display === 'flex') {
+            closeImageModal();
+        }
+    });
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            }
+        });
+    });
+    
+    // Contact form submission
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                service: document.getElementById('service').value,
+                message: document.getElementById('message').value,
+                date: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            saveMessage(formData);
+            
+            // Send email notification if email is set
+            const notificationEmail = localStorage.getItem('notificationEmail');
+            if (notificationEmail) {
+                // In a real app, you would send this to a server to handle email sending
+                console.log('Message would be sent to:', notificationEmail);
+                console.log('Message content:', formData);
+            }
+            
+            alert('Ďakujeme za vašu správu! Čoskoro vás budeme kontaktovať.');
+            this.reset();
+        });
+    }
+
+    // Admin Panel Functionality
+    const adminLoginBtn = document.getElementById('adminLoginBtn');
+    const adminModal = document.getElementById('adminModal');
+    const adminPanel = document.getElementById('adminPanel');
+    const closeModal = document.getElementById('closeModal');
+    const loginForm = document.getElementById('loginForm');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const adminTabs = document.querySelectorAll('.admin-tab');
+    const adminSections = document.querySelectorAll('.admin-section');
+    const uploadForm = document.getElementById('uploadForm');
+    const settingsForm = document.getElementById('settingsForm');
+
+    // Show login modal when login button is clicked
+    adminLoginBtn.addEventListener('click', () => {
+        adminModal.style.display = 'flex';
+    });
+
+    // Close modal
+    closeModal.addEventListener('click', () => {
+        adminModal.style.display = 'none';
+    });
+
+    // Login form submission
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        
+        // Check credentials
+        if (username === 'nemanja.slovakia' && password === 'baric2025') {
+            adminModal.style.display = 'none';
+            adminPanel.style.display = 'block';
+            loadMessages();
+            loadGallery();
+            loadSettings();
+        } else {
+            alert('Nesprávne prihlasovacie údaje!');
+        }
+    });
+
+    // Logout button
+    logoutBtn.addEventListener('click', () => {
+        adminPanel.style.display = 'none';
+    });
+
+    // Tab switching
+    adminTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active class from all tabs and sections
+            adminTabs.forEach(t => t.classList.remove('active', 'text-blue-600', 'border-blue-600'));
+            adminTabs.forEach(t => t.classList.add('text-gray-600', 'hover:text-blue-600'));
+            adminSections.forEach(s => s.classList.remove('active'));
+            
+            // Add active class to clicked tab and corresponding section
+            tab.classList.add('active', 'text-blue-600', 'border-blue-600');
+            tab.classList.remove('text-gray-600', 'hover:text-blue-600');
+            const tabId = tab.getAttribute('data-tab');
+            document.getElementById(`${tabId}Section`).classList.add('active');
+        });
+    });
+
+    // Save message to localStorage
+    function saveMessage(message) {
+        let messages = JSON.parse(localStorage.getItem('messages') || '[]');
+        messages.push(message);
+        localStorage.setItem('messages', JSON.stringify(messages));
+    }
+
+    // Load messages from localStorage
+    function loadMessages() {
+        const messagesList = document.getElementById('messagesList');
+        messagesList.innerHTML = '';
+        
+        const messages = JSON.parse(localStorage.getItem('messages') || '[]');
+        
+        if (messages.length === 0) {
+            messagesList.innerHTML = '<p class="text-gray-600">Žiadne správy neboli nájdené.</p>';
+            return;
+        }
+        
+        messages.reverse().forEach(msg => {
+            const messageItem = document.createElement('div');
+            messageItem.className = 'message-item';
+            messageItem.innerHTML = `
+                <div class="bg-white p-4 rounded-lg shadow mb-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="font-bold text-gray-800">${msg.name}</h4>
+                        <span class="text-sm text-gray-500">${new Date(msg.date).toLocaleString()}</span>
+                    </div>
+                    <p class="text-gray-600 mb-1"><strong>Email:</strong> ${msg.email}</p>
+                    ${msg.phone ? `<p class="text-gray-600 mb-1"><strong>Telefón:</strong> ${msg.phone}</p>` : ''}
+                    ${msg.service ? `<p class="text-gray-600 mb-1"><strong>Služba:</strong> ${msg.service}</p>` : ''}
+                    <p class="text-gray-600 mt-2">${msg.message}</p>
+                </div>
+            `;
+            messagesList.appendChild(messageItem);
+        });
+    }
+
+    // Gallery management
+    function loadGallery() {
+        const galleryGrid = document.getElementById('galleryGrid');
+        galleryGrid.innerHTML = '';
+        
+        const gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
+        
+        if (gallery.length === 0) {
+            galleryGrid.innerHTML = '<p class="text-gray-600">Žiadne obrázky v galérii.</p>';
+            return;
+        }
+        
+        gallery.forEach((img, index) => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            galleryItem.innerHTML = `
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <img src="${img.data}" alt="${img.name}" class="gallery-image mb-2">
+                    <div class="flex justify-between">
+                        <button class="delete-image bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded text-sm" data-index="${index}">
+                            <i class="fas fa-trash"></i> Vymazať
+                        </button>
+                    </div>
+                </div>
+            `;
+            galleryGrid.appendChild(galleryItem);
+        });
+        
+        // Add event listeners to delete buttons
+        document.querySelectorAll('.delete-image').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const index = this.getAttribute('data-index');
+                deleteImage(index);
+            });
+        });
+    }
+
+    // Upload image
+    uploadForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const fileInput = document.getElementById('imageUpload');
+        const file = fileInput.files[0];
+        
+        if (!file) {
+            alert('Prosím vyberte obrázok.');
+            return;
+        }
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const imageData = e.target.result;
+            
+            // Save to gallery
+            let gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
+            gallery.push({
+                name: file.name,
+                type: file.type,
+                size: file.size,
+                data: imageData
+            });
+            
+            localStorage.setItem('gallery', JSON.stringify(gallery));
+            loadGallery();
+            renderGallery(); // Update the frontend gallery
+            fileInput.value = '';
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // Delete image
+    function deleteImage(index) {
+        if (confirm('Naozaj chcete vymazať tento obrázok?')) {
+            let gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
+            gallery.splice(index, 1);
+            localStorage.setItem('gallery', JSON.stringify(gallery));
+            loadGallery();
+            renderGallery(); // Update the frontend gallery
+        }
+    }
+
+    // Load settings
+    function loadSettings() {
+        const notificationEmail = localStorage.getItem('notificationEmail');
+        if (notificationEmail) {
+            document.getElementById('notificationEmail').value = notificationEmail;
+        }
+    }
+
+    // Save settings
+    settingsForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const notificationEmail = document.getElementById('notificationEmail').value;
+        const newPassword = document.getElementById('adminPassword').value;
+        const confirmPassword = document.getElementById('adminPasswordConfirm').value;
+        
+        // Save notification email
+        if (notificationEmail) {
+            localStorage.setItem('notificationEmail', notificationEmail);
+        }
+        
+        // Change password if provided and matches
+        if (newPassword && newPassword === confirmPassword) {
+            // In a real app, you would hash this password and store it securely
+            alert('Heslo bolo zmenené. V reálnej aplikácii by toto heslo bolo zašifrované a uložené bezpečne.');
+        } else if (newPassword !== confirmPassword) {
+            alert('Heslá sa nezhodujú!');
+            return;
+        }
+        
+        alert('Nastavenia boli uložené.');
+        document.getElementById('adminPassword').value = '';
+        document.getElementById('adminPasswordConfirm').value = '';
+    });
+
+    // Initialize the page
+    initializeGallery();
+    renderGallery();
+</script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=MrHouse111/nemoservis" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
+</html>
