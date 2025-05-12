@@ -27,9 +27,9 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         
-        .logo-container { /* Dodata klasa za lakše targetiranje loga */
-            cursor: pointer; /* Pokazuje da je klikabilno */
-            user-select: none; /* Sprečava selekciju teksta pri višestrukom kliku */
+        .logo-container { 
+            cursor: pointer; 
+            user-select: none; 
         }
         .logo {
             font-family: 'Montserrat', sans-serif;
@@ -258,13 +258,6 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Admin Login Button - UKLONJENO
-    <div class="fixed top-4 right-4 z-50">
-        <button id="adminLoginBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300">
-            <i class="fas fa-sign-in-alt mr-2"></i>Login
-        </button>
-    </div>
-    -->
 
 <!-- Admin Login Modal -->
 <div class="admin-modal" id="adminModal">
@@ -317,7 +310,7 @@
         <div class="mb-6">
             <h4 class="font-bold text-gray-700 mb-2">Pridať nový obrázok / obrázky</h4>
             <form id="uploadForm" class="flex flex-col md:flex-row gap-4">
-                <input type="file" id="imageUpload" accept="image/*" class="px-4 py-2 border border-gray-300 rounded-lg" multiple required> <!-- DODAT "multiple" atribut -->
+                <input type="file" id="imageUpload" accept="image/*" class="px-4 py-2 border border-gray-300 rounded-lg" multiple required> 
                 <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Nahrať</button>
             </form>
         </div>
@@ -359,7 +352,7 @@
 <!-- Original Website Content -->
 <header class="bg-white shadow-md sticky top-0 z-40">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-        <div class="flex items-center logo-container" id="logoContainer"> <!-- Dodat ID i klasu logo kontejneru -->
+        <div class="flex items-center logo-container" id="logoContainer"> 
             <div class="logo text-3xl font-bold text-blue-600 mr-2">
                 <span class="text-gray-800">Servis</span>Nemo
             </div>
@@ -826,7 +819,7 @@
     // Render gallery grid
     function renderGallery() {
         const galleryContainer = document.getElementById('galleryContainer');
-        if (!galleryContainer) return; // Provera da li element postoji
+        if (!galleryContainer) return; 
         galleryContainer.innerHTML = ''; 
         
         const gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
@@ -950,8 +943,7 @@
 
 
     // Admin Panel Functionality
-    // const adminLoginBtn = document.getElementById('adminLoginBtn'); // Uklonjeno jer se sada koristi logo
-    const logoContainer = document.getElementById('logoContainer'); // Novi selektor za logo
+    const logoContainer = document.getElementById('logoContainer'); 
     const adminModal = document.getElementById('adminModal');
     const adminPanel = document.getElementById('adminPanel');
     const closeModalButton = document.getElementById('closeModal'); 
@@ -965,7 +957,6 @@
     let logoClickCount = 0;
     let logoClickTimer = null;
 
-    // Novi event listener za logo
     if(logoContainer) {
         logoContainer.addEventListener('click', () => {
             logoClickCount++;
@@ -973,13 +964,13 @@
                 clearTimeout(logoClickTimer);
             }
             logoClickTimer = setTimeout(() => {
-                logoClickCount = 0; // Resetuj brojač ako prođe previše vremena između klikova
-            }, 1500); // Resetuj nakon 1.5 sekunde neaktivnosti
+                logoClickCount = 0; 
+            }, 1500); 
 
             if (logoClickCount === 5) {
                 if(adminModal) adminModal.style.display = 'flex';
-                logoClickCount = 0; // Resetuj brojač
-                clearTimeout(logoClickTimer); // Obriši tajmer
+                logoClickCount = 0; 
+                clearTimeout(logoClickTimer); 
             }
         });
     }
@@ -1094,7 +1085,7 @@
         e.preventDefault();
         
         const fileInput = document.getElementById('imageUpload');
-        const files = fileInput.files; // Sada uzimamo SVE selektovane fajlove
+        const files = fileInput.files; 
         
         if (!files || files.length === 0) {
             alert('Prosím vyberte obrázok alebo obrázky.');
@@ -1103,7 +1094,7 @@
         
         let gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
 
-        Array.from(files).forEach(file => { // Iteriramo kroz svaki fajl
+        Array.from(files).forEach(file => { 
             const reader = new FileReader();
             reader.onload = function(event) {
                 const imageData = event.target.result;
@@ -1113,17 +1104,14 @@
                     size: file.size,
                     data: imageData
                 });
-                
-                // Sačuvaj i osveži nakon što je poslednji fajl pročitan
-                if (gallery.length === (JSON.parse(localStorage.getItem('gallery') || '[]').length + files.length)) {
-                    localStorage.setItem('gallery', JSON.stringify(gallery));
-                    loadAdminGallery(); 
-                    renderGallery(); 
-                }
+                // Sačuvaj nakon svakog pročitanog fajla, da bi se osvežilo odmah
+                localStorage.setItem('gallery', JSON.stringify(gallery));
+                loadAdminGallery(); 
+                renderGallery(); 
             };
             reader.readAsDataURL(file);
         });
-        fileInput.value = ''; // Resetuj input polje
+        fileInput.value = ''; 
     });
 
     function deleteAdminImage(index) { 
