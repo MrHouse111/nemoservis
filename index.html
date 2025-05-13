@@ -12,11 +12,10 @@
         body {
             font-family: 'Montserrat', sans-serif;
             scroll-behavior: smooth;
-            /* Vraćena originalna boja pozadine, Tailwind klasa će kontrolisati za sekcije */
         }
         
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://i.ibb.co/fG8wGZLr/KAPIJA.jpg'); /* Slika kapije ostaje */
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://i.ibb.co/fG8wGZLr/KAPIJA.jpg'); 
             background-size: cover;
             background-position: center;
             position: relative;
@@ -35,6 +34,15 @@
         .logo {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
+            display: flex; 
+            align-items: center; 
+        }
+        .logo-img { 
+            height: 40px; 
+            width: 40px; /* Dodato da bi bio kvadrat pre zaobljivanja */
+            margin-right: 0.5rem; 
+            border-radius: 50%; /* ZA OKRUGAO LOGO */
+            object-fit: cover; 
         }
         
         .wave-shape {
@@ -55,22 +63,22 @@
         }
         
         .wave-shape .shape-fill {
-            fill: #f3f4f6; /* Tailwind bg-gray-100 - boja prve sekcije ispod heroja (#services) za svetlu temu */
+            fill: #f3f4f6; 
         }
 
         .price-list {
-            background-color: #f8fafc; /* Originalna boja za svetlu temu */
+            background-color: #f8fafc; 
             border-radius: 0.5rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
         .price-item {
-            border-bottom: 1px solid #e2e8f0; /* Originalna boja za svetlu temu */
+            border-bottom: 1px solid #e2e8f0; 
             transition: all 0.3s ease;
         }
 
         .price-item:hover {
-            background-color: #ffffff; /* Originalna boja za svetlu temu */
+            background-color: #ffffff; 
         }
 
         .price-item:last-child {
@@ -170,7 +178,7 @@
             cursor: pointer;
         }
         
-        /* Admin Panel Styles - ostaju nepromenjeni */
+        /* Admin Panel Styles */
         .admin-modal {
             display: none;
             position: fixed;
@@ -268,6 +276,10 @@
             .gallery-image-admin { 
                 height: 150px;
             }
+            .logo-img { 
+                height: 30px;
+                width: 30px; 
+            }
         }
         
         @media (max-width: 480px) {
@@ -277,7 +289,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-50"> <!-- Vraćena originalna Tailwind klasa za pozadinu celog body -->
+<body class="bg-gray-50">
 
 <!-- Admin Login Modal -->
 <div class="admin-modal" id="adminModal">
@@ -315,18 +327,12 @@
         <button class="admin-tab px-4 py-2 font-medium text-gray-600 hover:text-blue-600" data-tab="settings">Nastavenia</button>
     </div>
 
-    <!-- Messages Section -->
     <div class="admin-section active" id="messagesSection">
         <h3 class="text-xl font-bold text-gray-800 mb-4">Správy od zákazníkov</h3>
-        <div id="messagesList">
-            <!-- Messages will be loaded here -->
-        </div>
+        <div id="messagesList"></div>
     </div>
-
-    <!-- Gallery Section -->
     <div class="admin-section" id="gallerySection">
         <h3 class="text-xl font-bold text-gray-800 mb-4">Manažment galérie</h3>
-        
         <div class="mb-6">
             <h4 class="font-bold text-gray-700 mb-2">Pridať nový obrázok / obrázky</h4>
             <form id="uploadForm" class="flex flex-col md:flex-row gap-4">
@@ -334,28 +340,20 @@
                 <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Nahrať</button>
             </form>
         </div>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="adminGalleryGrid"> 
-            <!-- Gallery images will be loaded here -->
-        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="adminGalleryGrid"></div>
     </div>
-
-    <!-- Settings Section -->
     <div class="admin-section" id="settingsSection">
         <h3 class="text-xl font-bold text-gray-800 mb-4">Nastavenia</h3>
-        
         <form id="settingsForm">
             <div class="mb-4">
                 <label for="notificationEmail" class="block text-gray-700 font-medium mb-2">Email pre notifikácie</label>
                 <input type="email" id="notificationEmail" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
             </div>
-            
             <div class="mb-4">
                 <label for="adminPassword" class="block text-gray-700 font-medium mb-2">Zmeniť heslo</label>
                 <input type="password" id="adminPassword" placeholder="Nové heslo" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent mb-2">
                 <input type="password" id="adminPasswordConfirm" placeholder="Potvrďte nové heslo" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
             </div>
-            
             <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300">Uložiť zmeny</button>
         </form>
     </div>
@@ -371,11 +369,12 @@
 
 
 <!-- Original Website Content -->
-<header class="bg-white shadow-md sticky top-0 z-40"> <!-- Vraćena bela pozadina header-a -->
+<header class="bg-white shadow-md sticky top-0 z-40">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
         <div class="flex items-center logo-container" id="logoContainer"> 
-            <div class="logo text-3xl font-bold text-blue-600 mr-2">
-                <span class="text-gray-800">Servis</span>Nemo <!-- Vraćene boje logo-a -->
+            <div class="logo text-3xl font-bold text-blue-600"> 
+                <img src="https://i.ibb.co/84Bc9dK4/download.png" alt="Servis Nemo Logo" class="logo-img">
+                <span class="text-gray-800">Servis</span>Nemo
             </div>
         </div>
         <nav class="hidden md:flex space-x-8">
@@ -387,13 +386,12 @@
             <a href="#contact" class="text-gray-800 hover:text-blue-600 font-medium">Kontakt</a>
         </nav>
         <div class="md:hidden">
-            <button id="menu-btn" class="text-gray-800 focus:outline-none"> <!-- Vraćena boja ikonice menija -->
+            <button id="menu-btn" class="text-gray-800 focus:outline-none">
                 <i class="fas fa-bars text-2xl"></i>
             </button>
         </div>
     </div>
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-4 shadow-lg"> <!-- Vraćena bela pozadina mobilnog menija -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-4 shadow-lg">
         <a href="#home" class="block py-2 text-gray-800 hover:text-blue-600">Domov</a>
         <a href="#services" class="block py-2 text-gray-800 hover:text-blue-600">Služby</a>
         <a href="#pricing" class="block py-2 text-gray-800 hover:text-blue-600">Cenník</a>
@@ -403,8 +401,7 @@
     </div>
 </header>
 
-<!-- Hero Section -->
-<section id="home" class="hero text-white"> <!-- Tekst u hero sekciji ostaje beo zbog kontrasta sa slikom -->
+<section id="home" class="hero text-white">
     <div class="container mx-auto px-4 py-32 text-center hero-content">
         <h1 class="text-4xl md:text-6xl font-bold mb-6">Špecializovaný servis brán a vrat</h1>
         <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Profesionálna montáž, opravy a údržba všetkých typov brán a vrat na celom Slovensku.</p>
@@ -419,27 +416,24 @@
     </div>
 </section>
 
-<!-- Services Section -->
-<section id="services" class="py-16 bg-gray-100"> <!-- Vraćena originalna Tailwind klasa za pozadinu -->
+<section id="services" class="py-16 bg-gray-100"> 
     <div class="container mx-auto px-4">
         <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Naše služby</h2> <!-- Vraćena boja teksta -->
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Naše služby</h2>
             <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
-            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Špecializujeme sa výhradne na servis a inštaláciu brán a vrat. Ponúkame komplexné riešenia pre všetky vaše potreby.</p> <!-- Vraćena boja teksta -->
+            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Špecializujeme sa výhradne na servis a inštaláciu brán a vrat. Ponúkame komplexné riešenia pre všetky vaše potreby.</p>
         </div>
-        
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300"> <!-- Vraćena bela pozadina kartice -->
-                <div class="h-48 bg-gray-200 flex items-center justify-center"> <!-- Vraćena originalna pozadina ikonice -->
-                    <i class="fas fa-tools text-6xl text-blue-600"></i> <!-- Vraćena originalna boja ikonice -->
+            <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300">
+                <div class="h-48 bg-gray-200 flex items-center justify-center">
+                    <i class="fas fa-tools text-6xl text-blue-600"></i>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">Opravy brán</h3> <!-- Vraćena boja teksta -->
-                    <p class="text-gray-600 mb-4">Komplexné opravy všetkých typov brán vrátane mechanických a elektronických závad.</p> <!-- Vraćena boja teksta -->
-                    <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a> <!-- Vraćene boje linka -->
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Opravy brán</h3>
+                    <p class="text-gray-600 mb-4">Komplexné opravy všetkých typov brán vrátane mechanických a elektronických závad.</p>
+                    <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
                 </div>
             </div>
-            
             <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300">
                 <div class="h-48 bg-gray-200 flex items-center justify-center">
                     <i class="fas fa-door-open text-6xl text-blue-600"></i>
@@ -450,7 +444,6 @@
                     <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
                 </div>
             </div>
-
             <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300">
                 <div class="h-48 bg-gray-200 flex items-center justify-center">
                     <i class="fas fa-cogs text-6xl text-blue-600"></i>
@@ -461,7 +454,6 @@
                     <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
                 </div>
             </div>
-
             <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300">
                 <div class="h-48 bg-gray-200 flex items-center justify-center">
                     <i class="fas fa-key text-6xl text-blue-600"></i>
@@ -472,7 +464,6 @@
                     <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
                 </div>
             </div>
-
             <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300">
                 <div class="h-48 bg-gray-200 flex items-center justify-center">
                     <i class="fas fa-shield-alt text-6xl text-blue-600"></i>
@@ -483,7 +474,6 @@
                     <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
                 </div>
             </div>
-
             <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300">
                 <div class="h-48 bg-gray-200 flex items-center justify-center">
                     <i class="fas fa-mobile-alt text-6xl text-blue-600"></i>
@@ -498,16 +488,14 @@
     </div>
 </section>
 
-<!-- Pricing Section -->
-<section id="pricing" class="py-16 bg-white"> <!-- Vraćena originalna Tailwind klasa za pozadinu -->
+<section id="pricing" class="py-16 bg-white"> 
     <div class="container mx-auto px-4">
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Naše ceny</h2>
             <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
             <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Ponúkame transparentné a konkurencieschopné ceny za naše služby. Všetky ceny sú uvedené bez DPH.</p>
         </div>
-
-        <div class="max-w-4xl mx-auto price-list overflow-hidden"> <!-- price-list klasa već ima svoju pozadinu definisanu u CSS-u -->
+        <div class="max-w-4xl mx-auto price-list overflow-hidden">
             <div class="price-item p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div class="mb-4 md:mb-0 md:mr-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Príchod technika na miesto</h3>
@@ -517,7 +505,6 @@
                     <span class="price-tag">Od 50€ (Bratislava)</span>
                 </div>
             </div>
-            
             <div class="price-item p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div class="mb-4 md:mb-0 md:mr-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Opravy a modernizácia brán</h3>
@@ -527,7 +514,6 @@
                     <span class="price-tag">Individuálna cenová ponuka</span>
                 </div>
             </div>
-
             <div class="price-item p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div class="mb-4 md:mb-0 md:mr-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Nastavenie a programovanie ovládačov</h3>
@@ -537,7 +523,6 @@
                     <span class="price-tag">Od 20€ za kus</span>
                 </div>
             </div>
-
             <div class="price-item p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div class="mb-4 md:mb-0 md:mr-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Výmena pružinového systému</h3>
@@ -547,7 +532,6 @@
                     <span class="price-tag">Od 200€</span>
                 </div>
             </div>
-
             <div class="price-item p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div class="mb-4 md:mb-0 md:mr-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Inštalácia nového pohonu</h3>
@@ -557,7 +541,6 @@
                     <span class="price-tag">Od 150€</span>
                 </div>
             </div>
-
              <div class="price-item p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div class="mb-4 md:mb-0 md:mr-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Pravidelná údržba brán</h3>
@@ -568,7 +551,6 @@
                 </div>
             </div>
         </div>
-
         <div class="mt-12 text-center">
             <p class="text-gray-600 mb-6">Všetky uvedené ceny sú orientačné. Presná cena sa určuje na základe rozsahu práce a použitých materiálov.</p>
             <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 inline-block">Požiadať o cenovú ponuku</a>
@@ -576,8 +558,7 @@
     </div>
 </section>
 
-<!-- About Section -->
-<section id="about" class="py-16 bg-gray-100"> <!-- Vraćena originalna Tailwind klasa za pozadinu -->
+<section id="about" class="py-16 bg-gray-100"> 
     <div class="container mx-auto px-4">
         <div class="flex flex-col md:flex-row items-center">
             <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
@@ -589,12 +570,12 @@
                 <p class="text-gray-600 mb-4">Našim cieľom je poskytovať kvalitné a spoľahlivé služby za rozumnú cenu. Všetci naši zamestnanci sú kvalifikovaní odborníci s dlhoročnými skúsenosťami v oblasti automatických brán a vrat.</p>
                 <p class="text-gray-600 mb-6">Ponúkame komplexné riešenia pre všetky vaše potreby súvisiace s bránami a vratami - od montáže nových zariadení až po pravidelnú údržbu a opravy.</p>
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-white p-4 rounded-lg shadow"> <!-- Vraćena bela pozadina kartice -->
-                        <div class="text-blue-600 text-3xl mb-2"> <!-- Vraćena boja ikonice -->
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <div class="text-blue-600 text-3xl mb-2">
                             <i class="fas fa-medal"></i>
                         </div>
-                        <h4 class="font-bold text-gray-800">Kvalita</h4> <!-- Vraćena boja teksta -->
-                        <p class="text-gray-600 text-sm">Zaručujeme vysokú kvalitu všetkých vykonaných prác</p> <!-- Vraćena boja teksta -->
+                        <h4 class="font-bold text-gray-800">Kvalita</h4>
+                        <p class="text-gray-600 text-sm">Zaručujeme vysokú kvalitu všetkých vykonaných prác</p>
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow">
                         <div class="text-blue-600 text-3xl mb-2">
@@ -623,33 +604,26 @@
     </div>
 </section>
 
-<!-- Gallery Section -->
-<section id="gallery" class="py-16 bg-white"> <!-- Vraćena originalna Tailwind klasa za pozadinu -->
+<section id="gallery" class="py-16 bg-white"> 
     <div class="container mx-auto px-4">
         <div class="text-center mb-12">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Naša galéria</h2>
             <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
             <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Pozrite si naše realizácie a práce, ktoré sme vykonali pre našich klientov.</p>
         </div>
-        
-        <div class="gallery-grid" id="galleryContainer">
-            <!-- Images will be loaded here by JavaScript -->
-        </div>
+        <div class="gallery-grid" id="galleryContainer"></div>
     </div>
 </section>
 
-<!-- Contact Section -->
-<section id="contact" class="py-16 bg-white"> <!-- Vraćena originalna Tailwind klasa za pozadinu -->
+<section id="contact" class="py-16 bg-white"> 
     <div class="container mx-auto px-4">
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Kontaktujte nás</h2>
             <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
         </div>
-        
         <div class="flex flex-col md:flex-row">
             <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
                 <h3 class="text-2xl font-bold text-gray-800 mb-6">Kontaktné údaje</h3>
-                
                 <div class="mb-6">
                     <div class="flex items-start mb-4">
                         <div class="text-blue-600 mr-4 mt-1">
@@ -657,20 +631,18 @@
                         </div>
                         <div>
                             <h4 class="font-bold text-gray-800 mb-1">Adresa</h4>
-                            <p class="text-gray-600">Servis Nemo s.r.o.<br>Hlavná 123<br>821 01 Bratislava</p>
+                            <p class="text-gray-600">Nemanja Baric<br>Karpatské námestie 7770/10A<br>83106 Bratislava-Rača</p>
                         </div>
                     </div>
-                    
                     <div class="flex items-start mb-4">
                         <div class="text-blue-600 mr-4 mt-1">
                             <i class="fas fa-phone-alt text-xl"></i>
                         </div>
                         <div>
                             <h4 class="font-bold text-gray-800 mb-1">Telefón</h4>
-                            <p class="text-gray-600">+421 123 456 789</p>
+                            <p class="text-gray-600">+421 951 442 014</p>
                         </div>
                     </div>
-                    
                     <div class="flex items-start mb-4">
                         <div class="text-blue-600 mr-4 mt-1">
                             <i class="fas fa-envelope text-xl"></i>
@@ -680,7 +652,6 @@
                             <p class="text-gray-600">info@servisnemo.sk</p>
                         </div>
                     </div>
-                    
                     <div class="flex items-start">
                         <div class="text-blue-600 mr-4 mt-1">
                             <i class="fas fa-clock text-xl"></i>
@@ -691,33 +662,29 @@
                         </div>
                     </div>
                 </div>
-                
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">Firemné údaje</h3>
-                <div class="bg-white p-4 rounded-lg shadow"> <!-- Vraćena bela pozadina -->
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <p class="text-gray-600 mb-2"><span class="font-bold">Obchodné meno:</span> Nemanja Baric</p>
                     <p class="text-gray-600 mb-2"><span class="font-bold">IČO:</span> 53891589</p>
-                    <p class="text-gray-600 mb-2"><span class="font-bold">DIČ:</span> 3120995383</p>
-                    <p class="text-gray-600"><span class="font-bold">IBAN:</span> SK42 1100 0000 0029 4122 9092</p>
+                    <p class="text-gray-600 mb-2"><span class="font-bold">Číslo živnostenského registra:</span> 110-301798</p>
+                    <p class="text-gray-600"><span class="font-bold">Adresa miesta činnosti:</span> Karpatské námestie 7770/10A, 83106 Bratislava-Rača</p>
                 </div>
             </div>
-            
             <div class="md:w-1/2">
                 <h3 class="text-2xl font-bold text-gray-800 mb-6">Napíšte nám</h3>
                 <form id="contactForm" class="space-y-4">
                     <div>
                         <label for="name" class="block text-gray-700 font-medium mb-1">Meno a priezvisko</label>
-                        <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required> <!-- Vraćeni originalni stilovi inputa -->
+                        <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
                     </div>
-                    
                     <div>
                         <label for="email" class="block text-gray-700 font-medium mb-1">Email</label>
                         <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
                     </div>
-                    
                     <div>
                         <label for="phone" class="block text-gray-700 font-medium mb-1">Telefón</label>
                         <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
                     </div>
-    
                     <div>
                         <label for="service" class="block text-gray-700 font-medium mb-1">Služba</label>
                         <select id="service" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
@@ -731,12 +698,10 @@
                             <option value="other">Iné</option>
                         </select>
                     </div>
-    
                     <div>
                         <label for="message" class="block text-gray-700 font-medium mb-1">Správa</label>
                         <textarea id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required></textarea>
                     </div>
-    
                     <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 w-full">Odoslať správu</button>
                 </form>
             </div>
@@ -744,13 +709,15 @@
     </div>
 </section>
 
-<!-- Footer -->
-<footer class="bg-gray-800 text-white py-8"> <!-- Footer ostaje taman kako je bio i u originalu -->
+<footer class="bg-gray-800 text-white py-8">
     <div class="container mx-auto px-4">
         <div class="flex flex-col md:flex-row justify-between">
             <div class="mb-6 md:mb-0">
-                <div class="logo text-3xl font-bold text-white mb-4">
-                    <span class="text-gray-300">Servis</span>Nemo
+                <div class="logo text-3xl font-bold text-white mb-2 flex items-center">
+                    <img src="https://i.ibb.co/84Bc9dK4/download.png" alt="Servis Nemo Logo" class="logo-img" style="filter: brightness(0) invert(1);">
+                    <div>
+                        <span class="text-gray-300">Servis</span>Nemo
+                    </div>
                 </div>
                 <p class="text-gray-400 mb-4">Špecializovaný servis brán a vrat na Slovensku.</p>
                 <div class="flex space-x-4">
@@ -765,7 +732,6 @@
                     </a>
                 </div>
             </div>
-            
             <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
                 <div>
                     <h4 class="text-lg font-bold text-white mb-4">Navigácia</h4>
@@ -778,7 +744,6 @@
                         <li><a href="#contact" class="text-gray-400 hover:text-white transition duration-300">Kontakt</a></li>
                     </ul>
                 </div>
-                
                 <div>
                     <h4 class="text-lg font-bold text-white mb-4">Služby</h4>
                     <ul class="space-y-2">
@@ -788,7 +753,6 @@
                         <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Programovanie</a></li>
                     </ul>
                 </div>
-                
                 <div>
                     <h4 class="text-lg font-bold text-white mb-4">Právne informácie</h4>
                     <ul class="space-y-2">
@@ -799,16 +763,13 @@
                 </div>
             </div>
         </div>
-        
         <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
-            <p>© 2023 Servis Nemo s.r.o. Všetky práva vyhradené.</p>
+            <p>© 2024 Nemanja Baric. Všetky práva vyhradené.</p>
         </div>
     </div>
 </footer>
 
 <script>
-    // JavaScript kod ostaje isti kao u prethodnoj verziji
-
     // Initialize gallery with default images if none exist in localStorage
     function initializeGallery() {
         if (!localStorage.getItem('gallery')) {
@@ -839,7 +800,7 @@
         const gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
         
         if (gallery.length === 0) {
-            galleryContainer.innerHTML = '<p class="text-gray-600 text-center col-span-3">Žiadne obrázky v galérii</p>'; // Vraćena boja teksta za svetlu temu
+            galleryContainer.innerHTML = '<p class="text-gray-600 text-center col-span-3">Žiadne obrázky v galérii</p>';
             return;
         }
         
@@ -1182,6 +1143,11 @@
     document.addEventListener('DOMContentLoaded', () => {
         initializeGallery();
         renderGallery();
+        const currentYear = new Date().getFullYear();
+        const footerYearElement = document.querySelector('footer .text-center p');
+        if (footerYearElement) {
+            footerYearElement.textContent = `© ${currentYear} Nemanja Baric. Všetky práva vyhradené.`;
+        }
     });
 </script>
 </body>
