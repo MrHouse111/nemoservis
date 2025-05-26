@@ -291,7 +291,6 @@
 </head>
 <body class="bg-gray-50">
 
-<!-- Admin Login Modal -->
 <div class="admin-modal" id="adminModal">
     <div class="admin-modal-content">
         <h2 class="text-2xl font-bold text-gray-800 mb-6">Admin Prihlásenie</h2>
@@ -312,7 +311,6 @@
     </div>
 </div>
 
-<!-- Admin Panel -->
 <div class="admin-panel" id="adminPanel">
     <div class="admin-nav">
         <h2 class="text-xl font-bold">Servis Nemo Admin</h2>
@@ -359,7 +357,6 @@
     </div>
 </div>
 
-<!-- Image Modal -->
 <div class="image-modal" id="imageModal">
     <span class="close-modal">×</span>
     <div class="modal-content">
@@ -368,7 +365,6 @@
 </div>
 
 
-<!-- Original Website Content -->
 <header class="bg-white shadow-md sticky top-0 z-40">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
         <div class="flex items-center logo-container" id="logoContainer"> 
@@ -421,7 +417,7 @@
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Naše služby</h2>
             <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
-            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Špecializujeme sa výhradne na servis a inštaláciu brán a vrat. Ponúkame komplexné riešenia pre všetky vaše potreby.</p>
+            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Špecializujeme sa výhradne na servis a inštaláciu brán a vrat. Ponúkame komplexné riešenia pre všetky vaše potrebe.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300">
@@ -440,7 +436,7 @@
                 </div>
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-3">Montáž nových brán</h3>
-                    <p class="text-gray-600 mb-4">Profesionálna inštalácia nových posuvných, krídlových a garážových vrat.</p>
+                    <p class="text-gray-600 mb-4">Profesionálna inštalácia nových posuvných, krídlových i garážových vrat.</p>
                     <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
                 </div>
             </div>
@@ -535,7 +531,7 @@
             <div class="price-item p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div class="mb-4 md:mb-0 md:mr-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Inštalácia nového pohonu</h3>
-                    <p class="text-gray-600">Ak váš aktuálny pohon dosluhuje, našimi odborníkmi nainštalujeme nový, správne ho zapojíme a nakalibrujeme pre optimálnu a spoľahlivú prevádzku.</p>
+                    <p class="text-gray-600">Ak váš aktuálny pohon dosluhuje, našimi odborníkmi nainštalujeme nový, správno ga zapojíme a nakalibrujeme za optimalnu i pouzdanu radu vasih vrata.</p>
                 </div>
                 <div class="flex-shrink-0">
                     <span class="price-tag">Od 150€</span>
@@ -769,7 +765,32 @@
     </div>
 </footer>
 
+<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-storage-compat.js"></script>
+
 <script>
+    // Your Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+     apiKey: "AIzaSyBip1PpGIV16oi2tNqRlhTo0SpqLNX8fS0",
+     authDomain: "servis-nemo-website.firebaseapp.com",
+     projectId: "servis-nemo-website",
+     storageBucket: "servis-nemo-website.firebasestorage.app",
+     messagingSenderId: "601409102965",
+     appId: "1:601409102965:web:c0d38bcd7032cfb66b043c",
+     measurementId: "G-S5XCZHHR9T"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Get references to Firebase services
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+    const storage = firebase.storage();
+
     // Initialize gallery with default images if none exist in localStorage
     function initializeGallery() {
         if (!localStorage.getItem('gallery')) {
@@ -960,6 +981,7 @@
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
         
+        // TEMP: Replace with Firebase Auth
         if (username === 'nemanja.slovakia' && password === 'baric2025') {
             if(adminModal) adminModal.style.display = 'none';
             if(adminPanel) adminPanel.style.display = 'block';
@@ -1028,7 +1050,7 @@
         const gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
         
         if (gallery.length === 0) {
-            adminGalleryGrid.innerHTML = '<p class="text-gray-600">Žiadne obrázky v galérii.</p>';
+            adminGalleryGrid.innerHTML = '<p class="text-gray-600">Žiadne obrázky u galérii.</p>';
             return;
         }
         
@@ -1123,7 +1145,7 @@
         }
         
         if (newPassword && newPassword === confirmPassword) {
-            alert('Heslo bolo zmenené. V reálnej aplikácii by toto heslo bolo zašifrované a uložené bezpečne.');
+            alert('Heslo bolo zmenené. V reálnej aplikácii by toto heslo bilo zašifrovano i bezbedno pohranjeno.');
         } else if (newPassword && newPassword !== confirmPassword) {
             alert('Heslá sa nezhodujú!');
             return; 
