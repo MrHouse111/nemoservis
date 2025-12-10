@@ -14,7 +14,7 @@
     <title>Montáž brán a garážových vrat Bratislava | Servis Nemo</title>
     <meta name="description" content="Profesionálna montáž posuvných brán, krídlových brán a garážových vrat v Bratislave a okolí. Kompletné zapojenie pohonov, nastavenie bezpečnostných prvkov a odovzdanie do prevádzky.">
     <meta name="keywords" content="montáž brán Bratislava, montáž garážových brán, montáž posuvnej brány, montáž krídlovej brány, montáž garážových vrat, inštalácia pohonu brány, montáž automatickej brány">
-    <link rel="canonical" href="https://nemoservis.sk/montaz.html">
+    <link rel="canonical" href="https://nemoservis.sk/montaz/">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
@@ -24,7 +24,8 @@
             scroll-behavior: smooth;
         }
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://i.ibb.co/fG8wGZLr/KAPIJA.jpg');
+            /* Use local hero image for the montaz page */
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../hero-montaz.png');
             background-size: cover;
             background-position: center;
             position: relative;
@@ -81,14 +82,14 @@
             </div>
         </div>
         <nav class="hidden md:flex space-x-8">
-            <a href="index.html#home" class="text-gray-800 hover:text-blue-600 font-medium">Domov</a>
-            <a href="index.html#services" class="text-gray-800 hover:text-blue-600 font-medium">Služby</a>
-            <a href="montaz.html" class="text-blue-600 font-medium">Montáž brán</a>
-            <a href="oprava.html" class="text-gray-800 hover:text-blue-600 font-medium">Oprava brán</a>
-            <a href="index.html#pricing" class="text-gray-800 hover:text-blue-600 font-medium">Cenník</a>
-            <a href="index.html#about" class="text-gray-800 hover:text-blue-600 font-medium">O nás</a>
-            <a href="index.html#gallery" class="text-gray-800 hover:text-blue-600 font-medium">Galéria</a>
-            <a href="index.html#contact" class="text-gray-800 hover:text-blue-600 font-medium">Kontakt</a>
+            <a href="../" class="text-gray-800 hover:text-blue-600 font-medium">Domov</a>
+            <a href="../sluzby/" class="text-gray-800 hover:text-blue-600 font-medium">Služby</a>
+            <a href="../montaz/" class="text-blue-600 font-medium">Montáž brán</a>
+            <a href="../oprava/" class="text-gray-800 hover:text-blue-600 font-medium">Oprava brán</a>
+            <a href="../cennik/" class="text-gray-800 hover:text-blue-600 font-medium">Cenník</a>
+            <a href="../o-nas/" class="text-gray-800 hover:text-blue-600 font-medium">O nás</a>
+            <a href="../galeria/" class="text-gray-800 hover:text-blue-600 font-medium">Galéria</a>
+            <a href="../kontakt/" class="text-gray-800 hover:text-blue-600 font-medium">Kontakt</a>
         </nav>
         <div class="md:hidden">
             <button id="menu-btn" class="text-gray-800 focus:outline-none">
@@ -97,14 +98,14 @@
         </div>
     </div>
     <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-4 shadow-lg">
-        <a href="index.html#home" class="block py-2 text-gray-800 hover:text-blue-600">Domov</a>
-        <a href="index.html#services" class="block py-2 text-gray-800 hover:text-blue-600">Služby</a>
-        <a href="montaz.html" class="block py-2 text-blue-600">Montáž brán</a>
-        <a href="oprava.html" class="block py-2 text-gray-800 hover:text-blue-600">Oprava brán</a>
-        <a href="index.html#pricing" class="block py-2 text-gray-800 hover:text-blue-600">Cenník</a>
-        <a href="index.html#about" class="block py-2 text-gray-800 hover:text-blue-600">O nás</a>
-        <a href="index.html#gallery" class="block py-2 text-gray-800 hover:text-blue-600">Galéria</a>
-        <a href="index.html#contact" class="block py-2 text-gray-800 hover:text-blue-600">Kontakt</a>
+        <a href="../" class="block py-2 text-gray-800 hover:text-blue-600">Domov</a>
+        <a href="../sluzby/" class="block py-2 text-gray-800 hover:text-blue-600">Služby</a>
+        <a href="../montaz/" class="block py-2 text-blue-600">Montáž brán</a>
+        <a href="../oprava/" class="block py-2 text-gray-800 hover:text-blue-600">Oprava brán</a>
+        <a href="../cennik/" class="block py-2 text-gray-800 hover:text-blue-600">Cenník</a>
+        <a href="../o-nas/" class="block py-2 text-gray-800 hover:text-blue-600">O nás</a>
+        <a href="../galeria/" class="block py-2 text-gray-800 hover:text-blue-600">Galéria</a>
+        <a href="../kontakt/" class="block py-2 text-gray-800 hover:text-blue-600">Kontakt</a>
     </div>
 </header>
 <!-- HERO -->
@@ -116,7 +117,7 @@
         <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
             Kompletná montáž posuvných, krídlových a garážových brán – od osadenia po nastavenie automatického pohonu.
         </p>
-        <a href="index.html#contact" class="cta-button inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-full text-lg transition duration-300">
+        <a href="../kontakt/" class="cta-button inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-full text-lg transition duration-300">
             Chcem montáž brány
         </a>
     </div>
@@ -171,6 +172,7 @@
             </div>
         </div>
     </section>
+
     <!-- Ako prebieha montáž -->
     <section class="container mx-auto px-4 mb-16">
         <div class="bg-white rounded-lg shadow-lg p-8">
@@ -187,7 +189,8 @@
             </ol>
         </div>
     </section>
-    <!-- Prečo montáž od Servis Nemo -->
+
+    <!-- Prečo my -->
     <section class="container mx-auto px-4 mb-16">
         <div class="text-center mb-10">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
@@ -215,6 +218,7 @@
             </div>
         </div>
     </section>
+
     <!-- CTA -->
     <section class="container mx-auto px-4 mb-8">
         <div class="bg-blue-600 rounded-2xl shadow-lg p-8 md:p-10 text-center text-white">
@@ -224,12 +228,13 @@
             <p class="mb-6 text-lg">
                 Pošlite nám nezáväznú požiadavku cez formulár alebo nám zavolajte. Dohodneme si termín, ktorý vám vyhovuje.
             </p>
-            <a href="index.html#contact" class="inline-block bg-white text-blue-600 font-bold py-3 px-8 rounded-full text-lg hover:bg-gray-100 transition duration-300">
+            <a href="../kontakt/" class="inline-block bg-white text-blue-600 font-bold py-3 px-8 rounded-full text-lg hover:bg-gray-100 transition duration-300">
                 Kontaktovať Servis Nemo
             </a>
         </div>
     </section>
 </main>
+
 <!-- FOOTER -->
 <footer class="bg-gray-800 text-white py-8">
     <div class="container mx-auto px-4">
@@ -258,21 +263,23 @@
                 <div>
                     <h4 class="text-lg font-bold text-white mb-4">Navigácia</h4>
                     <ul class="space-y-2">
-                        <li><a href="index.html#home" class="text-gray-400 hover:text-white transition duration-300">Domov</a></li>
-                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition duration-300">Služby</a></li>
-                        <li><a href="montaz.html" class="text-gray-400 hover:text-white transition duration-300">Montáž brán</a></li>
-                        <li><a href="oprava.html" class="text-gray-400 hover:text-white transition duration-300">Oprava brán</a></li>
-                        <li><a href="index.html#pricing" class="text-gray-400 hover:text-white transition duration-300">Cenník</a></li>
-                        <li><a href="index.html#contact" class="text-gray-400 hover:text-white transition duration-300">Kontakt</a></li>
+                        <li><a href="../" class="text-gray-400 hover:text-white transition duration-300">Domov</a></li>
+                        <li><a href="../sluzby/" class="text-gray-400 hover:text-white transition duration-300">Služby</a></li>
+                        <li><a href="../montaz/" class="text-gray-400 hover:text-white transition duration-300">Montáž brán</a></li>
+                        <li><a href="../oprava/" class="text-gray-400 hover:text-white transition duration-300">Oprava brán</a></li>
+                        <li><a href="../cennik/" class="text-gray-400 hover:text-white transition duration-300">Cenník</a></li>
+                        <li><a href="../o-nas/" class="text-gray-400 hover:text-white transition duration-300">O nás</a></li>
+                        <li><a href="../galeria/" class="text-gray-400 hover:text-white transition duration-300">Galéria</a></li>
+                        <li><a href="../kontakt/" class="text-gray-400 hover:text-white transition duration-300">Kontakt</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="text-lg font-bold text-white mb-4">Služby</h4>
                     <ul class="space-y-2">
-                        <li><a href="oprava.html" class="text-gray-400 hover:text-white transition duration-300">Opravy brán</a></li>
-                        <li><a href="montaz.html" class="text-gray-400 hover:text-white transition duration-300">Montáž brán</a></li>
-                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition duration-300">Údržba pohonov</a></li>
-                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition duration-300">Programovanie</a></li>
+                        <li><a href="../oprava/" class="text-gray-400 hover:text-white transition duration-300">Opravy brán</a></li>
+                        <li><a href="../montaz/" class="text-gray-400 hover:text-white transition duration-300">Montáž brán</a></li>
+                        <li><a href="../kontakt/" class="text-gray-400 hover:text-white transition duration-300">Údržba pohonov</a></li>
+                        <li><a href="../kontakt/" class="text-gray-400 hover:text-white transition duration-300">Programovanie ovládačov</a></li>
                     </ul>
                 </div>
                 <div>
@@ -290,6 +297,7 @@
         </div>
     </div>
 </footer>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" defer></script>
 <script>
     // mobile menu toggle
@@ -300,7 +308,8 @@
             mobileMenu.classList.toggle('hidden');
         });
     }
-    // dynamic year in footer
+
+    // dynamic year
     const yEl = document.getElementById('footerYear');
     if (yEl) {
         const currentYear = new Date().getFullYear();

@@ -24,11 +24,12 @@
         }
         
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://i.ibb.co/fG8wGZLr/KAPIJA.jpg'); 
+            /* Use local background image for the home page */
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('hero-index.png');
             background-size: cover;
             background-position: center;
             position: relative;
-            padding-bottom: 150px; 
+            padding-bottom: 150px;
         }
         
         .service-card:hover {
@@ -383,14 +384,14 @@
             </div>
         </div>
         <nav class="hidden md:flex space-x-8">
-            <a href="index.html#home" class="text-gray-800 hover:text-blue-600 font-medium">Domov</a>
-            <a href="index.html#services" class="text-gray-800 hover:text-blue-600 font-medium">Služby</a>
-            <a href="montaz.html" class="text-gray-800 hover:text-blue-600 font-medium">Montáž brán</a>
-            <a href="oprava.html" class="text-gray-800 hover:text-blue-600 font-medium">Oprava brán</a>
-            <a href="index.html#pricing" class="text-gray-800 hover:text-blue-600 font-medium">Cenník</a>
-            <a href="index.html#about" class="text-gray-800 hover:text-blue-600 font-medium">O nás</a>
-            <a href="index.html#gallery" class="text-gray-800 hover:text-blue-600 font-medium">Galéria</a>
-            <a href="index.html#contact" class="text-gray-800 hover:text-blue-600 font-medium">Kontakt</a>
+            <a href="/" class="text-gray-800 hover:text-blue-600 font-medium">Domov</a>
+            <a href="sluzby/" class="text-gray-800 hover:text-blue-600 font-medium">Služby</a>
+            <a href="montaz/" class="text-gray-800 hover:text-blue-600 font-medium">Montáž brán</a>
+            <a href="oprava/" class="text-gray-800 hover:text-blue-600 font-medium">Oprava brán</a>
+            <a href="cennik/" class="text-gray-800 hover:text-blue-600 font-medium">Cenník</a>
+            <a href="o-nas/" class="text-gray-800 hover:text-blue-600 font-medium">O nás</a>
+            <a href="galeria/" class="text-gray-800 hover:text-blue-600 font-medium">Galéria</a>
+            <a href="kontakt/" class="text-gray-800 hover:text-blue-600 font-medium">Kontakt</a>
         </nav>
         <div class="md:hidden">
             <button id="menu-btn" class="text-gray-800 focus:outline-none">
@@ -399,14 +400,14 @@
         </div>
     </div>
     <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-4 shadow-lg">
-        <a href="index.html#home" class="block py-2 text-gray-800 hover:text-blue-600">Domov</a>
-        <a href="index.html#services" class="block py-2 text-gray-800 hover:text-blue-600">Služby</a>
-        <a href="montaz.html" class="block py-2 text-gray-800 hover:text-blue-600">Montáž brán</a>
-        <a href="oprava.html" class="block py-2 text-gray-800 hover:text-blue-600">Oprava brán</a>
-        <a href="index.html#pricing" class="block py-2 text-gray-800 hover:text-blue-600">Cenník</a>
-        <a href="index.html#about" class="block py-2 text-gray-800 hover:text-blue-600">O nás</a>
-        <a href="index.html#gallery" class="block py-2 text-gray-800 hover:text-blue-600">Galéria</a>
-        <a href="index.html#contact" class="block py-2 text-gray-800 hover:text-blue-600">Kontakt</a>
+        <a href="/" class="block py-2 text-gray-800 hover:text-blue-600">Domov</a>
+        <a href="sluzby/" class="block py-2 text-gray-800 hover:text-blue-600">Služby</a>
+        <a href="montaz/" class="block py-2 text-gray-800 hover:text-blue-600">Montáž brán</a>
+        <a href="oprava/" class="block py-2 text-gray-800 hover:text-blue-600">Oprava brán</a>
+        <a href="cennik/" class="block py-2 text-gray-800 hover:text-blue-600">Cenník</a>
+        <a href="o-nas/" class="block py-2 text-gray-800 hover:text-blue-600">O nás</a>
+        <a href="galeria/" class="block py-2 text-gray-800 hover:text-blue-600">Galéria</a>
+        <a href="kontakt/" class="block py-2 text-gray-800 hover:text-blue-600">Kontakt</a>
     </div>
 </header>
 
@@ -414,7 +415,7 @@
     <div class="container mx-auto px-4 py-32 text-center hero-content">
         <h1 class="text-4xl md:text-6xl font-bold mb-6">Špecializovaný servis brán a vrat</h1>
         <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Profesionálna montáž, opravy a údržba všetkých typov brán a vrat na celom Slovensku.</p>
-        <a href="#contact" class="cta-button inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-full text-lg transition duration-300">
+        <a href="kontakt/" class="cta-button inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-full text-lg transition duration-300">
             Kontaktujte nás
         </a>
     </div>
@@ -440,7 +441,7 @@
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-3">Opravy brán</h3>
                     <p class="text-gray-600 mb-4">Komplexné opravy všetkých typov brán vrátane mechanických a elektronických závad.</p>
-                    <a href="oprava.html" class="text-blue-600 font-medium hover:text-blue-800">Viac o oprave brán →</a>
+                    <a href="oprava/" class="text-blue-600 font-medium hover:text-blue-800">Viac o oprave brán →</a>
                 </div>
             </div>
             <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300">
@@ -450,7 +451,7 @@
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-3">Montáž nových brán</h3>
                     <p class="text-gray-600 mb-4">Profesionálna inštalácia nových posuvných, krídlových i garážových vrat.</p>
-                    <a href="montaz.html" class="text-blue-600 font-medium hover:text-blue-800">Viac o montáži brán →</a>
+                    <a href="montaz/" class="text-blue-600 font-medium hover:text-blue-800">Viac o montáži brán →</a>
                 </div>
             </div>
             <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300">
@@ -460,7 +461,7 @@
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-3">Údržba pohonov</h3>
                     <p class="text-gray-600 mb-4">Servis a výmena automatických pohonov pre všetky typy brán a vrat.</p>
-                    <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
+                    <a href="kontakt/" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
                 </div>
             </div>
             <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300">
@@ -470,7 +471,7 @@
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-3">Programovanie ovládačov</h3>
                     <p class="text-gray-600 mb-4">Výroba a programovanie ovládačov pre automatické brány a vráta.</p>
-                    <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
+                    <a href="kontakt/" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
                 </div>
             </div>
             <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300">
@@ -480,7 +481,7 @@
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-3">Bezpečnostné systémy</h3>
                     <p class="text-gray-600 mb-4">Inštalácia fotobuniek a iných bezpečnostných prvkov pre brány.</p>
-                    <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
+                    <a href="kontakt/" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
                 </div>
             </div>
             <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg transition duration-300">
@@ -490,7 +491,7 @@
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-3">Smart ovládanie</h3>
                     <p class="text-gray-600 mb-4">Moderné riešenia pre ovládanie brán cez mobilné zariadenia.</p>
-                    <a href="#contact" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
+                    <a href="kontakt/" class="text-blue-600 font-medium hover:text-blue-800">Objednať službu →</a>
                 </div>
             </div>
         </div>
@@ -562,7 +563,7 @@
         </div>
         <div class="mt-12 text-center">
             <p class="text-gray-600 mb-6">Všetky uvedené ceny sú orientačné. Presná cena sa určuje na základe rozsahu práce a použitých materiálov.</p>
-            <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 inline-block">Požiadať o cenovú ponuku</a>
+            <a href="kontakt/" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 inline-block">Požiadať o cenovú ponuku</a>
         </div>
     </div>
 </section>
@@ -745,21 +746,25 @@
                 <div>
                     <h4 class="text-lg font-bold text-white mb-4">Navigácia</h4>
                     <ul class="space-y-2">
-                        <li><a href="index.html#home" class="text-gray-400 hover:text-white transition duration-300">Domov</a></li>
-                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition duration-300">Služby</a></li>
-                        <li><a href="index.html#pricing" class="text-gray-400 hover:text-white transition duration-300">Cenník</a></li>
-                        <li><a href="index.html#about" class="text-gray-400 hover:text-white transition duration-300">O nás</a></li>
-                        <li><a href="index.html#gallery" class="text-gray-400 hover:text-white transition duration-300">Galéria</a></li>
-                        <li><a href="index.html#contact" class="text-gray-400 hover:text-white transition duration-300">Kontakt</a></li>
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition duration-300">Domov</a></li>
+                        <li><a href="sluzby/" class="text-gray-400 hover:text-white transition duration-300">Služby</a></li>
+                        <li><a href="montaz/" class="text-gray-400 hover:text-white transition duration-300">Montáž brán</a></li>
+                        <li><a href="oprava/" class="text-gray-400 hover:text-white transition duration-300">Oprava brán</a></li>
+                        <li><a href="cennik/" class="text-gray-400 hover:text-white transition duration-300">Cenník</a></li>
+                        <li><a href="o-nas/" class="text-gray-400 hover:text-white transition duration-300">O nás</a></li>
+                        <li><a href="galeria/" class="text-gray-400 hover:text-white transition duration-300">Galéria</a></li>
+                        <li><a href="kontakt/" class="text-gray-400 hover:text-white transition duration-300">Kontakt</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="text-lg font-bold text-white mb-4">Služby</h4>
                     <ul class="space-y-2">
-                        <li><a href="oprava.html" class="text-gray-400 hover:text-white transition duration-300">Opravy brán</a></li>
-                        <li><a href="montaz.html" class="text-gray-400 hover:text-white transition duration-300">Montáž brán</a></li>
-                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition duration-300">Údržba pohonov</a></li>
-                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition duration-300">Programovanie</a></li>
+                        <li><a href="oprava/" class="text-gray-400 hover:text-white transition duration-300">Opravy brán</a></li>
+                        <li><a href="montaz/" class="text-gray-400 hover:text-white transition duration-300">Montáž brán</a></li>
+                        <li><a href="sluzby/" class="text-gray-400 hover:text-white transition duration-300">Údržba pohonov</a></li>
+                        <li><a href="sluzby/" class="text-gray-400 hover:text-white transition duration-300">Programovanie ovládačov</a></li>
+                        <li><a href="sluzby/" class="text-gray-400 hover:text-white transition duration-300">Bezpečnostné systémy</a></li>
+                        <li><a href="sluzby/" class="text-gray-400 hover:text-white transition duration-300">Smart ovládanie</a></li>
                     </ul>
                 </div>
                 <div>

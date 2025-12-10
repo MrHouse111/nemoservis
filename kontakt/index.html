@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BL0N43E425"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BL0N43E425');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt | Servis Nemo</title>
+    <meta name="description" content="Kontaktujte spoločnosť Servis Nemo – montáž a opravy brán a vrat. Nájdete tu kontaktné údaje a formulár pre vaše otázky.">
+    <link rel="canonical" href="https://nemoservis.sk/kontakt/">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../hero-kontakt.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            padding-bottom: 150px;
+        }
+        .cta-button {
+            position: relative;
+            z-index: 50;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        .logo-container { cursor: pointer; user-select: none; }
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        .logo-img {
+            height: 40px;
+            width: 40px;
+            margin-right: 0.5rem;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        @media (max-width: 768px) {
+            .logo-img { height: 30px; width: 30px; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+<!-- HEADER -->
+<header class="bg-white shadow-md sticky top-0 z-40">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center logo-container">
+            <div class="logo text-3xl font-bold text-blue-600">
+                <img src="https://i.ibb.co/84Bc9dK4/download.png" alt="Servis Nemo Logo" class="logo-img">
+                <span class="text-gray-800">Servis</span>Nemo
+            </div>
+        </div>
+        <nav class="hidden md:flex space-x-8">
+            <a href="../" class="text-gray-800 hover:text-blue-600 font-medium">Domov</a>
+            <a href="../sluzby/" class="text-gray-800 hover:text-blue-600 font-medium">Služby</a>
+            <a href="../montaz/" class="text-gray-800 hover:text-blue-600 font-medium">Montáž brán</a>
+            <a href="../oprava/" class="text-gray-800 hover:text-blue-600 font-medium">Oprava brán</a>
+            <a href="../cennik/" class="text-gray-800 hover:text-blue-600 font-medium">Cenník</a>
+            <a href="../o-nas/" class="text-gray-800 hover:text-blue-600 font-medium">O nás</a>
+            <a href="../galeria/" class="text-gray-800 hover:text-blue-600 font-medium">Galéria</a>
+            <a href="../kontakt/" class="text-blue-600 font-medium">Kontakt</a>
+        </nav>
+        <div class="md:hidden">
+            <button id="menu-btn-kontakt" class="text-gray-800 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </div>
+    <div id="mobile-menu-kontakt" class="hidden md:hidden bg-white py-4 px-4 shadow-lg">
+        <a href="../" class="block py-2 text-gray-800 hover:text-blue-600">Domov</a>
+        <a href="../sluzby/" class="block py-2 text-gray-800 hover:text-blue-600">Služby</a>
+        <a href="../montaz/" class="block py-2 text-gray-800 hover:text-blue-600">Montáž brán</a>
+        <a href="../oprava/" class="block py-2 text-gray-800 hover:text-blue-600">Oprava brán</a>
+        <a href="../cennik/" class="block py-2 text-gray-800 hover:text-blue-600">Cenník</a>
+        <a href="../o-nas/" class="block py-2 text-gray-800 hover:text-blue-600">O nás</a>
+        <a href="../galeria/" class="block py-2 text-gray-800 hover:text-blue-600">Galéria</a>
+        <a href="../kontakt/" class="block py-2 text-blue-600">Kontakt</a>
+    </div>
+</header>
+<!-- HERO -->
+<section class="hero text-white" id="top">
+    <div class="container mx-auto px-4 py-32 text-center hero-content">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">Kontaktujte nás</h1>
+        <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Sme vám k dispozícii pre akékoľvek otázky, konzultácie alebo objednávky.</p>
+        <a href="tel:+421951442014" class="cta-button inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-full text-lg transition duration-300">
+            Zavolať teraz
+        </a>
+    </div>
+</section>
+
+<main class="py-16 bg-gray-100">
+    <!-- Contact Section -->
+    <section class="container mx-auto px-4 mb-16">
+        <div class="flex flex-col md:flex-row">
+            <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Kontaktné údaje</h2>
+                <div class="mb-6">
+                    <div class="flex items-start mb-4">
+                        <div class="text-blue-600 mr-4 mt-1"><i class="fas fa-map-marker-alt text-xl"></i></div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Adresa</h4>
+                            <p class="text-gray-600">Nemanja Baric<br>Karpatské námestie 7770/10A<br>83106 Bratislava-Rača</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start mb-4">
+                        <div class="text-blue-600 mr-4 mt-1"><i class="fas fa-phone-alt text-xl"></i></div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Telefón</h4>
+                            <p class="text-gray-600"><a href="tel:+421951442014" class="hover:text-blue-600">+421 951 442 014</a></p>
+                        </div>
+                    </div>
+                    <div class="flex items-start mb-4">
+                        <div class="text-blue-600 mr-4 mt-1"><i class="fas fa-envelope text-xl"></i></div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Email</h4>
+                            <p class="text-gray-600"><a href="mailto:info@nemoservis.sk" class="hover:text-blue-600">info@nemoservis.sk</a></p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-blue-600 mr-4 mt-1"><i class="fas fa-clock text-xl"></i></div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Otvorené</h4>
+                            <p class="text-gray-600">Pondelok - Piatok: 8:00 - 18:00<br>Sobota: 9:00 - 14:00<br>Nedeľa: Zatvorené</p>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Firemné údaje</h2>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <p class="text-gray-600 mb-2"><span class="font-bold">Obchodné meno:</span> Nemanja Baric</p>
+                    <p class="text-gray-600 mb-2"><span class="font-bold">IČO:</span> 53891589</p>
+                    <p class="text-gray-600 mb-2"><span class="font-bold">Číslo živnostenského registra:</span> 110-301798</p>
+                    <p class="text-gray-600"><span class="font-bold">Adresa miesta činnosti:</span> Karpatské námestie 7770/10A, 83106 Bratislava-Rača</p>
+                </div>
+            </div>
+            <div class="md:w-1/2">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Napíšte nám</h2>
+                <form id="contactForm" class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-gray-700 font-medium mb-1">Meno a priezvisko</label>
+                        <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-gray-700 font-medium mb-1">Email</label>
+                        <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-gray-700 font-medium mb-1">Telefón</label>
+                        <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="service" class="block text-gray-700 font-medium mb-1">Služba</label>
+                        <select id="service" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+                            <option value="">-- Vyberte službu --</option>
+                            <option value="repairs">Opravy brán</option>
+                            <option value="installation">Montáž brán</option>
+                            <option value="maintenance">Údržba pohonov</option>
+                            <option value="programming">Programovanie</option>
+                            <option value="other">Iné / Neviem</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-gray-700 font-medium mb-1">Správa</label>
+                        <textarea id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Odoslať správu</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+<!-- FOOTER -->
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between">
+            <div class="mb-6 md:mb-0">
+                <div class="logo text-3xl font-bold text-white mb-2 flex items-center">
+                    <img src="https://i.ibb.co/84Bc9dK4/download.png" alt="Servis Nemo Logo" class="logo-img" style="filter: brightness(0) invert(1);">
+                    <div>
+                        <span class="text-gray-300">Servis</span>Nemo
+                    </div>
+                </div>
+                <p class="text-gray-400 mb-4">Špecializovaný servis brán a vrat na Slovensku.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-facebook-f text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-linkedin-in text-xl"></i></a>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">Navigácia</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../" class="text-gray-400 hover:text-white transition duration-300">Domov</a></li>
+                        <li><a href="../sluzby/" class="text-gray-400 hover:text-white transition duration-300">Služby</a></li>
+                        <li><a href="../montaz/" class="text-gray-400 hover:text-white transition duration-300">Montáž brán</a></li>
+                        <li><a href="../oprava/" class="text-gray-400 hover:text-white transition duration-300">Oprava brán</a></li>
+                        <li><a href="../cennik/" class="text-gray-400 hover:text-white transition duration-300">Cenník</a></li>
+                        <li><a href="../kontakt/" class="text-gray-400 hover:text-white transition duration-300">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">Služby</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../oprava/" class="text-gray-400 hover:text-white transition duration-300">Opravy brán</a></li>
+                        <li><a href="../montaz/" class="text-gray-400 hover:text-white transition duration-300">Montáž brán</a></li>
+                        <li><a href="../kontakt/" class="text-gray-400 hover:text-white transition duration-300">Údržba pohonov</a></li>
+                        <li><a href="../kontakt/" class="text-gray-400 hover:text-white transition duration-300">Programovanie</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">Právne informácie</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Obchodné podmienky (TBD)</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Ochrana osobných údajov (TBD)</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Cookies (TBD)</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p id="footerYearKontakt">© 2024 Nemanja Baric. Všetky práva vyhradené.</p>
+        </div>
+    </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" defer></script>
+<script>
+    // Mobile menu toggle
+    const menuBtnKontakt = document.getElementById('menu-btn-kontakt');
+    const mobileMenuKontakt = document.getElementById('mobile-menu-kontakt');
+    if (menuBtnKontakt && mobileMenuKontakt) {
+        menuBtnKontakt.addEventListener('click', () => {
+            mobileMenuKontakt.classList.toggle('hidden');
+        });
+    }
+    // Dynamic year
+    const yElKontakt = document.getElementById('footerYearKontakt');
+    if (yElKontakt) {
+        const currentYear = new Date().getFullYear();
+        yElKontakt.textContent = `© ${currentYear} Nemanja Baric. Všetky práva vyhradené.`;
+    }
+    // Contact form submission
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                service: document.getElementById('service').value,
+                message: document.getElementById('message').value,
+                date: new Date().toISOString()
+            };
+            // Save message to localStorage
+            let messages = JSON.parse(localStorage.getItem('messages') || '[]');
+            messages.push(formData);
+            localStorage.setItem('messages', JSON.stringify(messages));
+            alert('Ďakujeme za vašu správu! Čoskoro vás budeme kontaktovať.');
+            this.reset();
+        });
+    }
+</script>
+</body>
+</html>

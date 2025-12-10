@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BL0N43E425"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BL0N43E425');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galéria | Servis Nemo</title>
+    <meta name="description" content="Prezrite si galériu našich realizácií a získajte inšpiráciu pre svoju bránu alebo vráta.">
+    <link rel="canonical" href="https://nemoservis.sk/galeria/">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../hero-galeria.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            padding-bottom: 150px;
+        }
+        .cta-button {
+            position: relative;
+            z-index: 50;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        .logo-container { cursor: pointer; user-select: none; }
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        .logo-img {
+            height: 40px;
+            width: 40px;
+            margin-right: 0.5rem;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        @media (max-width: 768px) {
+            .logo-img { height: 30px; width: 30px; }
+        }
+        /* Gallery styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            aspect-ratio: 4/3;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .gallery-item:hover {
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .modal-img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+        .close-modal {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+<!-- HEADER -->
+<header class="bg-white shadow-md sticky top-0 z-40">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center logo-container">
+            <div class="logo text-3xl font-bold text-blue-600">
+                <img src="https://i.ibb.co/84Bc9dK4/download.png" alt="Servis Nemo Logo" class="logo-img">
+                <span class="text-gray-800">Servis</span>Nemo
+            </div>
+        </div>
+        <nav class="hidden md:flex space-x-8">
+            <a href="../" class="text-gray-800 hover:text-blue-600 font-medium">Domov</a>
+            <a href="../sluzby/" class="text-gray-800 hover:text-blue-600 font-medium">Služby</a>
+            <a href="../montaz/" class="text-gray-800 hover:text-blue-600 font-medium">Montáž brán</a>
+            <a href="../oprava/" class="text-gray-800 hover:text-blue-600 font-medium">Oprava brán</a>
+            <a href="../cennik/" class="text-gray-800 hover:text-blue-600 font-medium">Cenník</a>
+            <a href="../o-nas/" class="text-gray-800 hover:text-blue-600 font-medium">O nás</a>
+            <a href="../galeria/" class="text-blue-600 font-medium">Galéria</a>
+            <a href="../kontakt/" class="text-gray-800 hover:text-blue-600 font-medium">Kontakt</a>
+        </nav>
+        <div class="md:hidden">
+            <button id="menu-btn-galeria" class="text-gray-800 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </div>
+    <div id="mobile-menu-galeria" class="hidden md:hidden bg-white py-4 px-4 shadow-lg">
+        <a href="../" class="block py-2 text-gray-800 hover:text-blue-600">Domov</a>
+        <a href="../sluzby/" class="block py-2 text-gray-800 hover:text-blue-600">Služby</a>
+        <a href="../montaz/" class="block py-2 text-gray-800 hover:text-blue-600">Montáž brán</a>
+        <a href="../oprava/" class="block py-2 text-gray-800 hover:text-blue-600">Oprava brán</a>
+        <a href="../cennik/" class="block py-2 text-gray-800 hover:text-blue-600">Cenník</a>
+        <a href="../o-nas/" class="block py-2 text-gray-800 hover:text-blue-600">O nás</a>
+        <a href="../galeria/" class="block py-2 text-blue-600">Galéria</a>
+        <a href="../kontakt/" class="block py-2 text-gray-800 hover:text-blue-600">Kontakt</a>
+    </div>
+</header>
+<!-- HERO -->
+<section class="hero text-white" id="top">
+    <div class="container mx-auto px-4 py-32 text-center hero-content">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">Galéria našich prác</h1>
+        <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Inšpirujte sa našimi realizáciami a zistite, čo dokážeme.</p>
+        <a href="../kontakt/" class="cta-button inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-full text-lg transition duration-300">
+            Kontaktujte nás
+        </a>
+    </div>
+</section>
+
+<main class="py-16 bg-gray-100">
+    <!-- Gallery Section -->
+    <section class="container mx-auto px-4 mb-16">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Naša galéria</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Pozrite si projekty, ktoré sme realizovali, a nechajte sa presvedčiť našou kvalitou.</p>
+        </div>
+        <div class="gallery-grid" id="galleryContainer"></div>
+    </section>
+    <!-- CTA Section -->
+    <section class="container mx-auto px-4 mb-8">
+        <div class="bg-blue-600 rounded-2xl shadow-lg p-8 md:p-10 text-center text-white">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Páčia sa vám naše realizácie?</h2>
+            <p class="mb-6 text-lg">Kontaktujte nás a radi pripravíme riešenie aj pre vás.</p>
+            <a href="../kontakt/" class="inline-block bg-white text-blue-600 font-bold py-3 px-8 rounded-full text-lg hover:bg-gray-100 transition duration-300">
+                Kontaktovať Servis Nemo
+            </a>
+        </div>
+    </section>
+</main>
+<!-- Image Modal -->
+<div class="image-modal" id="imageModal">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+        <img id="modalImage" class="modal-img" alt="Galéria Servis Nemo">
+    </div>
+</div>
+<!-- FOOTER -->
+<footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between">
+            <div class="mb-6 md:mb-0">
+                <div class="logo text-3xl font-bold text-white mb-2 flex items-center">
+                    <img src="https://i.ibb.co/84Bc9dK4/download.png" alt="Servis Nemo Logo" class="logo-img" style="filter: brightness(0) invert(1);">
+                    <div>
+                        <span class="text-gray-300">Servis</span>Nemo
+                    </div>
+                </div>
+                <p class="text-gray-400 mb-4">Špecializovaný servis brán a vrat na Slovensku.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-facebook-f text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-linkedin-in text-xl"></i></a>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">Navigácia</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../" class="text-gray-400 hover:text-white transition duration-300">Domov</a></li>
+                        <li><a href="../sluzby/" class="text-gray-400 hover:text-white transition duration-300">Služby</a></li>
+                        <li><a href="../montaz/" class="text-gray-400 hover:text-white transition duration-300">Montáž brán</a></li>
+                        <li><a href="../oprava/" class="text-gray-400 hover:text-white transition duration-300">Oprava brán</a></li>
+                        <li><a href="../cennik/" class="text-gray-400 hover:text-white transition duration-300">Cenník</a></li>
+                        <li><a href="../kontakt/" class="text-gray-400 hover:text-white transition duration-300">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">Služby</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../oprava/" class="text-gray-400 hover:text-white transition duration-300">Opravy brán</a></li>
+                        <li><a href="../montaz/" class="text-gray-400 hover:text-white transition duration-300">Montáž brán</a></li>
+                        <li><a href="../kontakt/" class="text-gray-400 hover:text-white transition duration-300">Údržba pohonov</a></li>
+                        <li><a href="../kontakt/" class="text-gray-400 hover:text-white transition duration-300">Programovanie</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">Právne informácie</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Obchodné podmienky (TBD)</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Ochrana osobných údajov (TBD)</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Cookies (TBD)</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+            <p id="footerYearGaleria">© 2024 Nemanja Baric. Všetky práva vyhradené.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" defer></script>
+<script>
+    // Load default gallery if not already present
+    function loadDefaultGallery() {
+        if (!localStorage.getItem('gallery')) {
+            const defaultImages = [
+                {
+                    name: "Realizácia 1",
+                    data: "https://i.ibb.co/Xf4HrhkT/53c70a78-ac51-4bfa-a596-d5c26525157e.jpg"
+                },
+                {
+                    name: "Realizácia 2",
+                    data: "https://i.ibb.co/N2jJk29k/da346e5f-24d8-4fe0-8820-1ddc528ccd80.jpg"
+                },
+                {
+                    name: "Realizácia 3",
+                    data: "https://i.ibb.co/YNWPvjz/2d5fdab3-6a7c-4986-b9bc-945dcb786f28.jpg"
+                }
+            ];
+            localStorage.setItem('gallery', JSON.stringify(defaultImages));
+        }
+    }
+    // Render gallery grid
+    function renderGallery() {
+        const galleryContainer = document.getElementById('galleryContainer');
+        if (!galleryContainer) return;
+        galleryContainer.innerHTML = '';
+        const gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
+        if (gallery.length === 0) {
+            galleryContainer.innerHTML = '<p class="text-gray-600 text-center col-span-3">Žiadne obrázky v galérii</p>';
+            return;
+        }
+        gallery.forEach((img) => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            galleryItem.innerHTML = `<img src="${img.data}" alt="${img.name}" class="gallery-img">`;
+            galleryItem.addEventListener('click', () => {
+                openImageModal(img.data);
+            });
+            galleryContainer.appendChild(galleryItem);
+        });
+    }
+    // Modal functions
+    const imageModal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeModalBtn = document.querySelector('.close-modal');
+    function openImageModal(imageSrc) {
+        if (modalImage) modalImage.src = imageSrc;
+        if (imageModal) imageModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    function closeImageModal() {
+        if (imageModal) imageModal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeImageModal);
+    if (imageModal) imageModal.addEventListener('click', (e) => {
+        if (e.target === imageModal) {
+            closeImageModal();
+        }
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && imageModal && imageModal.style.display === 'flex') {
+            closeImageModal();
+        }
+    });
+    // Mobile menu toggle
+    const menuBtnGaleria = document.getElementById('menu-btn-galeria');
+    const mobileMenuGaleria = document.getElementById('mobile-menu-galeria');
+    if (menuBtnGaleria && mobileMenuGaleria) {
+        menuBtnGaleria.addEventListener('click', () => {
+            mobileMenuGaleria.classList.toggle('hidden');
+        });
+    }
+    // Dynamic year
+    const yElGaleria = document.getElementById('footerYearGaleria');
+    if (yElGaleria) {
+        const currentYear = new Date().getFullYear();
+        yElGaleria.textContent = `© ${currentYear} Nemanja Baric. Všetky práva vyhradené.`;
+    }
+    // Initialize gallery on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        loadDefaultGallery();
+        renderGallery();
+    });
+</script>
+</body>
+</html>
