@@ -944,36 +944,48 @@
             }
         });
     });
-    
-    // Contact form submission
+    // Contact form submission (saves ONLINE to Firestore so it works across devices)
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                service: document.getElementById('service').value,
-                message: document.getElementById('message').value,
-                date: new Date().toISOString()
+                name: (document.getElementById('name')?.value || '').trim(),
+                email: (document.getElementById('email')?.value || '').trim(),
+                phone: (document.getElementById('phone')?.value || '').trim(),
+                service: (document.getElementById('service')?.value || '').trim(),
+                message: (document.getElementById('message')?.value || '').trim(),
+                date: new Date().toISOString(),
+                page: window.location.pathname || '/',
+                userAgent: navigator.userAgent || ''
             };
-            
-            saveMessageToLocalStorage(formData); 
-            
-            const notificationEmail = localStorage.getItem('notificationEmail');
-            if (notificationEmail) {
-                console.log('Simulacija slanja emaila na:', notificationEmail);
-                console.log('Sadržaj poruke:', formData);
+
+            try {
+                await saveMessageToFirestore(formData);
+                alert('Ďakujeme za vašu správu! Čoskoro vás budeme kontaktovať.');
+                this.reset();
+            } catch (err) {
+                console.error('Firestore save failed, falling back to localStorage:', err);
+                saveMessageToLocalStorage(formData);
+                alert('Správu sa nepodarilo odoslať online (problém s pripojením). Uložili sme ju lokálne v zariadení. Skúste prosím ešte raz, alebo nám zavolajte.');
+                this.reset();
             }
-            
-            alert('Ďakujeme za vašu správu! Čoskoro vás budeme kontaktovať.');
-            this.reset();
         });
     }
 
-    function saveMessageToLocalStorage(message) { 
+    async function saveMessageToFirestore(message) {
+        if (typeof db === 'undefined' || !db) {
+            throw new Error('Firestore (db) is not initialized');
+        }
+        const payload = {
+            ...message,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        };
+        await db.collection('messages').add(payload);
+    }
+
+    function saveMessageToLocalStorage(message) {
         let messages = JSON.parse(localStorage.getItem('messages') || '[]');
         messages.push(message);
         localStorage.setItem('messages', JSON.stringify(messages));
@@ -1053,35 +1065,86 @@
         });
     });
 
-    function loadAdminMessages() { 
+    async function loadAdminMessages() {
         const messagesList = document.getElementById('messagesList');
-        if(!messagesList) return;
-        messagesList.innerHTML = '';
-        
-        const messages = JSON.parse(localStorage.getItem('messages') || '[]');
-        
-        if (messages.length === 0) {
-            messagesList.innerHTML = '<p class="text-gray-600">Žiadne správy neboli nájdené.</p>';
-            return;
-        }
-        
-        messages.reverse().forEach(msg => {
-            const messageItem = document.createElement('div');
-            messageItem.className = 'message-item'; 
-            messageItem.innerHTML = `
-                <div class="bg-white p-4 rounded-lg shadow mb-4">
-                    <div class="flex justify-between items-start mb-2">
-                        <h4 class="font-bold text-gray-800">${msg.name}</h4>
-                        <span class="text-sm text-gray-500">${new Date(msg.date).toLocaleString()}</span>
+        if (!messagesList) return;
+
+        messagesList.innerHTML = '<p class=\"text-gray-600\">Načítavam správy…</p>';
+
+        // Prefer ONLINE messages from Firestore (shared across all devices)
+        try {
+            if (typeof db === 'undefined' || !db) {
+                throw new Error('Firestore (db) is not initialized');
+            }
+
+            const snap = await db
+                .collection('messages')
+                .orderBy('createdAt', 'desc')
+                .limit(200)
+                .get();
+
+            const messages = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+            if (messages.length === 0) {
+                messagesList.innerHTML = '<p class=\"text-gray-600\">Žiadne správy neboli nájdené.</p>';
+                return;
+            }
+
+            messagesList.innerHTML = '';
+            messages.forEach(msg => {
+                const messageItem = document.createElement('div');
+                messageItem.className = 'message-item';
+
+                const dt = msg.createdAt && typeof msg.createdAt.toDate === 'function'
+                    ? msg.createdAt.toDate()
+                    : (msg.date ? new Date(msg.date) : new Date());
+
+                const safe = (v) => (v === undefined || v === null) ? '' : String(v);
+
+                messageItem.innerHTML = `
+                    <div class=\"bg-white p-4 rounded-lg shadow mb-4\">
+                        <div class=\"flex justify-between items-start mb-2\">
+                            <h4 class=\"font-bold text-gray-800\">${safe(msg.name)}</h4>
+                            <span class=\"text-sm text-gray-500\">${dt.toLocaleString()}</span>
+                        </div>
+                        <p class=\"text-gray-600 mb-1\"><strong>Email:</strong> ${safe(msg.email)}</p>
+                        ${msg.phone ? `<p class=\"text-gray-600 mb-1\"><strong>Telefón:</strong> ${safe(msg.phone)}</p>` : ''}
+                        ${msg.service ? `<p class=\"text-gray-600 mb-1\"><strong>Služba:</strong> ${safe(msg.service)}</p>` : ''}
+                        <p class=\"text-gray-600 mt-2\">${safe(msg.message)}</p>
                     </div>
-                    <p class="text-gray-600 mb-1"><strong>Email:</strong> ${msg.email}</p>
-                    ${msg.phone ? `<p class="text-gray-600 mb-1"><strong>Telefón:</strong> ${msg.phone}</p>` : ''}
-                    ${msg.service ? `<p class="text-gray-600 mb-1"><strong>Služba:</strong> ${msg.service}</p>` : ''}
-                    <p class="text-gray-600 mt-2">${msg.message}</p>
-                </div>
-            `;
-            messagesList.appendChild(messageItem);
-        });
+                `;
+
+                messagesList.appendChild(messageItem);
+            });
+        } catch (err) {
+            console.error('Failed to load messages from Firestore, falling back to localStorage:', err);
+
+            // Fallback: old behavior (device-local)
+            const messages = JSON.parse(localStorage.getItem('messages') || '[]');
+            if (messages.length === 0) {
+                messagesList.innerHTML = '<p class=\"text-gray-600\">Žiadne správy neboli nájdené.</p>';
+                return;
+            }
+
+            messagesList.innerHTML = '';
+            messages.reverse().forEach(msg => {
+                const messageItem = document.createElement('div');
+                messageItem.className = 'message-item';
+                messageItem.innerHTML = `
+                    <div class=\"bg-white p-4 rounded-lg shadow mb-4\">
+                        <div class=\"flex justify-between items-start mb-2\">
+                            <h4 class=\"font-bold text-gray-800\">${msg.name || ''}</h4>
+                            <span class=\"text-sm text-gray-500\">${msg.date ? new Date(msg.date).toLocaleString() : ''}</span>
+                        </div>
+                        <p class=\"text-gray-600 mb-1\"><strong>Email:</strong> ${msg.email || ''}</p>
+                        ${msg.phone ? `<p class=\"text-gray-600 mb-1\"><strong>Telefón:</strong> ${msg.phone}</p>` : ''}
+                        ${msg.service ? `<p class=\"text-gray-600 mb-1\"><strong>Služba:</strong> ${msg.service}</p>` : ''}
+                        <p class=\"text-gray-600 mt-2\">${msg.message || ''}</p>
+                    </div>
+                `;
+                messagesList.appendChild(messageItem);
+            });
+        }
     }
 
     function loadAdminGallery() { 

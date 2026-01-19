@@ -55,9 +55,7 @@
             object-fit: cover;
         }
         @media (max-width: 768px) {
-            /* Increase logo size for better readability on mobile */
             .logo-img { height: 45px; width: 45px; }
-            /* Improve hero typography and CTA on mobile */
             .hero {
                 padding-bottom: 100px;
             }
@@ -160,7 +158,7 @@
                                 Pondelok - Piatok: 8:00 - 18:00<br>
                                 Sobota: 9:00 - 14:00<br>
                                 Nedeľa: 9:00 - 14:00<br>
-                                <span class="font-semibold">24/7:</span> Môžete nám kedykoľvek zavolať a nahlásiť poruchu alebo sa informovať.
+                                <span class="text-sm text-gray-500">Volajte 24/7 – nonstop príjem porúch a otázok.</span>
                             </p>
                         </div>
                     </div>
@@ -263,6 +261,11 @@
         </div>
     </div>
 </footer>
+
+<!-- Firebase (Firestore only) -->
+<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" defer></script>
 <script>
     // Mobile menu toggle
@@ -273,31 +276,71 @@
             mobileMenuKontakt.classList.toggle('hidden');
         });
     }
+
     // Dynamic year
     const yElKontakt = document.getElementById('footerYearKontakt');
     if (yElKontakt) {
         const currentYear = new Date().getFullYear();
         yElKontakt.textContent = `© ${currentYear} Nemanja Baric. Všetky práva vyhradené.`;
     }
-    // Contact form submission
+
+    // Firebase config (same project as home page)
+    const firebaseConfig = {
+     apiKey: "AIzaSyBip1PpGIV16oi2tNqRlhTo0SpqLNX8fS0",
+     authDomain: "servis-nemo-website.firebaseapp.com",
+     projectId: "servis-nemo-website",
+     storageBucket: "servis-nemo-website.firebasestorage.app",
+     messagingSenderId: "601409102965",
+     appId: "1:601409102965:web:c0d38bcd7032cfb66b043c",
+     measurementId: "G-S5XCZHHR9T"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    function saveMessageToLocalStorage(message) {
+        let messages = JSON.parse(localStorage.getItem('messages') || '[]');
+        messages.push(message);
+        localStorage.setItem('messages', JSON.stringify(messages));
+    }
+
+    async function saveMessageToFirestore(message) {
+        if (!db) throw new Error('Firestore not initialized');
+        const payload = {
+            ...message,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            source: 'kontakt',
+            page: (location && location.pathname) ? location.pathname : '/kontakt/',
+            userAgent: navigator.userAgent
+        };
+        await db.collection('messages').add(payload);
+    }
+
+    // Contact form submission (ONLINE -> Firestore; fallback -> localStorage)
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
+
             const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                service: document.getElementById('service').value,
-                message: document.getElementById('message').value,
+                name: (document.getElementById('name').value || '').trim(),
+                email: (document.getElementById('email').value || '').trim(),
+                phone: (document.getElementById('phone').value || '').trim(),
+                service: document.getElementById('service').value || '',
+                message: (document.getElementById('message').value || '').trim(),
                 date: new Date().toISOString()
             };
-            // Save message to localStorage
-            let messages = JSON.parse(localStorage.getItem('messages') || '[]');
-            messages.push(formData);
-            localStorage.setItem('messages', JSON.stringify(messages));
-            alert('Ďakujeme za vašu správu! Čoskoro vás budeme kontaktovať.');
-            this.reset();
+
+            try {
+                await saveMessageToFirestore(formData);
+                alert('Ďakujeme za vašu správu! Čoskoro vás budeme kontaktovať.');
+                this.reset();
+            } catch (err) {
+                console.error('Failed to send message to Firestore, saving locally:', err);
+                saveMessageToLocalStorage(formData);
+                alert('Správu sa nepodarilo odoslať online. Uložili sme ju do zariadenia a skúste to prosím znovu neskôr.');
+                this.reset();
+            }
         });
     }
 </script>
