@@ -262,9 +262,6 @@
     </div>
 </footer>
 
-<!-- Firebase (Firestore only) -->
-<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" defer></script>
 <script>
@@ -283,20 +280,36 @@
         const currentYear = new Date().getFullYear();
         yElKontakt.textContent = `© ${currentYear} Nemanja Baric. Všetky práva vyhradené.`;
     }
+    // Contact form submission
+    // Desktop: save locally (visible in Admin Panel on THIS device)
+    // Mobile: open user's email client (mailto) to servisnemoservis@gmail.com
+    const CONTACT_TO_EMAIL = 'servisnemoservis@gmail.com';
 
-    // Firebase config (same project as home page)
-    const firebaseConfig = {
-     apiKey: "AIzaSyBip1PpGIV16oi2tNqRlhTo0SpqLNX8fS0",
-     authDomain: "servis-nemo-website.firebaseapp.com",
-     projectId: "servis-nemo-website",
-     storageBucket: "servis-nemo-website.firebasestorage.app",
-     messagingSenderId: "601409102965",
-     appId: "1:601409102965:web:c0d38bcd7032cfb66b043c",
-     measurementId: "G-S5XCZHHR9T"
-    };
+    function isMobileDevice() {
+        const ua = (navigator.userAgent || '').toLowerCase();
+        const uaMobile = /android|iphone|ipad|ipod|windows phone/.test(ua);
+        const smallScreen = window.matchMedia && window.matchMedia('(max-width: 820px)').matches;
+        const hasTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+        return uaMobile || (hasTouch && smallScreen);
+    }
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+    function buildMailtoLink(formData) {
+        const subject = `Servis Nemo – Kontakt forma${formData.name ? ' (' + formData.name + ')' : ''}`;
+        const body =
+`Meno: ${formData.name}
+Email: ${formData.email}
+Telefón: ${formData.phone || '-'}
+Služba: ${formData.service || '-'}
+
+Správa:
+${formData.message}
+
+---
+Stránka: ${formData.page}
+Dátum: ${formData.date}`;
+
+        return `mailto:${CONTACT_TO_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
 
     function saveMessageToLocalStorage(message) {
         let messages = JSON.parse(localStorage.getItem('messages') || '[]');
@@ -304,43 +317,33 @@
         localStorage.setItem('messages', JSON.stringify(messages));
     }
 
-    async function saveMessageToFirestore(message) {
-        if (!db) throw new Error('Firestore not initialized');
-        const payload = {
-            ...message,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            source: 'kontakt',
-            page: (location && location.pathname) ? location.pathname : '/kontakt/',
-            userAgent: navigator.userAgent
-        };
-        await db.collection('messages').add(payload);
-    }
-
-    // Contact form submission (ONLINE -> Firestore; fallback -> localStorage)
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', async function(e) {
+        contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
             const formData = {
-                name: (document.getElementById('name').value || '').trim(),
-                email: (document.getElementById('email').value || '').trim(),
-                phone: (document.getElementById('phone').value || '').trim(),
-                service: document.getElementById('service').value || '',
-                message: (document.getElementById('message').value || '').trim(),
-                date: new Date().toISOString()
+                name: (document.getElementById('name')?.value || '').trim(),
+                email: (document.getElementById('email')?.value || '').trim(),
+                phone: (document.getElementById('phone')?.value || '').trim(),
+                service: (document.getElementById('service')?.value || '').trim(),
+                message: (document.getElementById('message')?.value || '').trim(),
+                date: new Date().toISOString(),
+                page: (location && location.pathname) ? location.pathname : '/kontakt/',
+                userAgent: navigator.userAgent || ''
             };
 
-            try {
-                await saveMessageToFirestore(formData);
-                alert('Ďakujeme za vašu správu! Čoskoro vás budeme kontaktovať.');
+            // Mobile: open email client
+            if (isMobileDevice()) {
+                window.location.href = buildMailtoLink(formData);
                 this.reset();
-            } catch (err) {
-                console.error('Failed to send message to Firestore, saving locally:', err);
-                saveMessageToLocalStorage(formData);
-                alert('Správu sa nepodarilo odoslať online. Uložili sme ju do zariadenia a skúste to prosím znovu neskôr.');
-                this.reset();
+                return;
             }
+
+            // Desktop: store locally for admin panel on this device
+            saveMessageToLocalStorage(formData);
+            alert('Ďakujeme za vašu správu! Čoskoro vás budeme kontaktovať.');
+            this.reset();
         });
     }
 </script>
