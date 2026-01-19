@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="sk">
 <head>
@@ -292,7 +293,7 @@
                 height: 45px;
                 width: 45px; 
             }
-            /* Improve hero typography and call‑to‑action spacing on mobile */
+            /* Improve hero typography and call-to-action spacing on mobile */
             .hero {
                 padding-bottom: 100px;
             }
@@ -686,7 +687,13 @@
                         </div>
                         <div>
                             <h4 class="font-bold text-gray-800 mb-1">Otvorené</h4>
-                            <p class="text-gray-600">Pondelok - Piatok: 8:00 - 18:00<br>Sobota: 9:00 - 14:00<br>Nedeľa: Zatvorené</p>
+                            <!-- UPDATED: Sunday working hours + 24/7 call info -->
+                            <p class="text-gray-600">
+                                Pondelok - Piatok: 8:00 - 18:00<br>
+                                Sobota: 9:00 - 14:00<br>
+                                Nedeľa: 9:00 - 14:00<br>
+                                <span class="font-semibold">24/7:</span> Môžete nám kedykoľvek zavolať a nahlásiť poruchu alebo sa informovať.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -1206,7 +1213,13 @@
         if (footerYearElement) {
             footerYearElement.textContent = `© ${currentYear} Nemanja Baric. Všetky práva vyhradené.`;
         }
+
+        // OPTIONAL QUALITY: default notification email if not set yet
+        if (!localStorage.getItem('notificationEmail')) {
+            localStorage.setItem('notificationEmail', 'servisnemoservis@gmail.com');
+        }
     });
 </script>
 </body>
 </html>
+```
